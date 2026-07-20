@@ -1,0 +1,48 @@
+# La Dolce Italia
+
+Personlig reiseguide til Italia laget av oss, én norsk og én halvt italiensk, som har reist mye i landet. Guiden dekker Roma, Napoli og Puglia med egne erfaringer, restauranttips, steder å besøke og lokal mat. Alt innhold er basert på egne opplevelser.
+
+Tospråklig (norsk/engelsk) med toggle øverst. Én HTML-fil hostet på GitHub Pages.
+
+---
+
+## Mappestruktur
+italia-guiden/
+├── index.html       ← selve guiden (døp om fra italy-guide.html)
+└── bilder/          ← alle bilder
+
+---
+
+## GitHub Pages
+
+1. Push til `main`
+2. Settings → Pages → Source: Deploy from a branch → `main` / `root`
+3. Siden ligger på `https://<brukernavn>.github.io/<repo-navn>/`
+
+Vil du ha eget domene legges det inn under samme Pages-innstilling.
+
+---
+
+## Oppdatere innholdet
+
+Nye tips samles i Google Docs og limes inn i Claude-prosjektet:
+
+> "Vi besøkte [sted] og vil legge til følgende: [notater]. Oppdater HTML-filen."
+
+Alle tekster har `data-no` og `data-en`-attributter, så nytt innhold trenger alltid begge språk.
+
+---
+
+## Bilder
+
+Legg bildene i `bilder/` med filnavnene under. Mangler en fil vises en stiplet ramme i stedet. Komprimer gjerne til rundt 1600 px bredde før opplasting ([squoosh.app](https://squoosh.app)).
+
+
+---
+
+## Design
+
+- **Farger:** Dyp skoggrønn `#1C3A2E`, gull `#C8A96E`, kremhvit `#FAF8F3`
+- **Fonter:** Playfair Display (titler) + Jost (brødtekst) via Google Fonts
+- **Tags:** grønn = generelt tips, gull = anbefalt, vinrød = vin, blå = metro/transport
+- **Navigasjon:** Regionmeny (dropdown på mobil) + sticky by/kategori-faner under
