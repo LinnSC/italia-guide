@@ -48,7 +48,9 @@ a:hover{color:var(--gull-dyp)}
 /* ---------- HEADER ---------- */
 header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidden}
 .hero-svg{display:block;width:100%;height:auto;max-height:340px}
-.hero-tekst{position:relative;text-align:center;padding:0 22px 44px}
+.hero-img-wrap{position:relative;background:var(--gronn)}
+.hero-img{display:block;width:100%;height:auto}
+.hero-tekst{position:absolute;left:0;right:0;bottom:6%;text-align:center;padding:0 22px}
 .hero-tekst h1{
   font-size:clamp(2.6rem,7vw,4.4rem);
   letter-spacing:.01em;
@@ -98,6 +100,7 @@ header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidd
   background:rgba(250,248,243,.96);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--kant)}
 .tabpanel{padding-top:28px}
+.tabpanel > .blokk:first-child{margin-top:0}
 .tab{
   font-family:'Jost',sans-serif;font-size:.8rem;font-weight:400;letter-spacing:.05em;
   padding:6px 14px;border-radius:999px;border:1px solid transparent;
@@ -120,7 +123,7 @@ header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidd
 
   .pills{
     display:none;
-    position:absolute;left:14px;right:14px;top:100%;
+    position:absolute;left:14px;right:14px;top:calc(100% + 2px);
     flex-direction:column;align-items:stretch;gap:5px;
     padding:10px;margin-top:-2px;
     background:var(--hvit);border:1px solid var(--kant);
@@ -166,16 +169,16 @@ main{padding:34px 0 90px;min-height:60vh}
 .meta{font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;
   color:var(--tekst-svak);margin:5px 0 10px;font-weight:400}
 .kort p{margin:0 0 10px;font-size:.96rem}
-.kort p:last-of-type{margin-bottom:0}
+.kort p:last-of-type{margin-bottom:14px}
 .kort ul{margin:0 0 10px;padding-left:18px;font-size:.96rem}
 .kort ul li{margin-bottom:5px}
 
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px}
-.tag{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
-  padding:3px 9px;border-radius:999px;border:1px solid}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:12px;
+  border-top:1px solid var(--kant)}
+.tag{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;
+  padding:2px 8px;border-radius:999px;border:1px solid}
 .tag.gronn{color:var(--gronn-lys);border-color:#BFD2C7;background:#F0F5F1}
 .tag.gull{color:var(--gull-dyp);border-color:#E3CE9F;background:#FBF5E8}
-.tag.vin{color:var(--vinrod);border-color:#D9BBC4;background:#F9F0F2}
 .tag.blaa{color:var(--blaa);border-color:#B7CBD9;background:#EFF4F8}
 
 /* intro-kort for byer: full bredde, skiller seg visuelt fra tipskorta */
@@ -191,6 +194,63 @@ main{padding:34px 0 90px;min-height:60vh}
 .liste dl{margin:0;display:grid;gap:14px}
 .liste dt{font-family:'Playfair Display',serif;font-weight:600;color:var(--gronn);font-size:1.03rem}
 .liste dd{margin:2px 0 0;font-size:.95rem;color:var(--tekst-svak)}
+
+
+/* ---------- FILTER ---------- */
+.filter-rad{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  margin:10px 0 0;padding-bottom:8px}
+.filter-dd{position:relative;display:inline-block}
+.filter-velg{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Jost',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;padding:6px 13px;border-radius:999px;
+  border:1px solid var(--kant);background:var(--hvit);color:var(--tekst-svak);
+  cursor:pointer;transition:.15s;white-space:nowrap}
+.filter-velg::after{
+  content:"";width:6px;height:6px;flex:0 0 auto;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translate(-1px,-1px);transition:.15s}
+.filter-velg:hover{border-color:var(--gull);color:var(--gronn)}
+.filter-velg.aktiv{background:var(--gronn);border-color:var(--gronn);color:var(--krem)}
+.filter-velg[aria-expanded="true"]::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.filter-liste{
+  position:absolute;top:calc(100% + 6px);left:0;z-index:40;min-width:100%;
+  background:var(--hvit);border:1px solid var(--kant);border-radius:12px;
+  box-shadow:0 8px 24px rgba(28,58,46,.12);padding:5px;display:none;white-space:nowrap}
+.filter-liste.apen{display:block}
+.filter-liste button{
+  display:block;width:100%;text-align:left;
+  font-family:'Jost',sans-serif;font-size:.8rem;font-weight:400;
+  padding:7px 14px;border:0;background:none;color:var(--tekst);
+  cursor:pointer;border-radius:8px;white-space:nowrap}
+.filter-liste button:hover{background:var(--krem)}
+.filter-liste button[aria-selected="true"]{background:var(--gronn);color:var(--krem);font-weight:500}
+.filter-knapp{
+  font-family:'Jost',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;padding:6px 13px;border-radius:999px;
+  border:1px solid var(--kant);background:var(--hvit);color:var(--tekst-svak);
+  cursor:pointer;transition:.15s;white-space:nowrap}
+.filter-knapp:hover{border-color:var(--gull);color:var(--gronn)}
+.filter-knapp.aktiv{background:var(--gull-dyp);border-color:var(--gull-dyp);color:var(--krem)}
+.filter-nullstill{
+  font-family:'Jost',sans-serif;font-size:.76rem;letter-spacing:.04em;
+  background:none;border:0;color:var(--tekst-svak);cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;padding:6px 4px;display:none}
+.filter-nullstill.synlig{display:inline}
+.filter-nullstill:hover{color:var(--gronn)}
+.ingen-treff{display:none;text-align:center;padding:28px;color:var(--tekst-svak);font-style:italic}
+.kort[data-skjult="1"]{display:none}
+
+/* Vår favoritt-stempel */
+.tag.favoritt{
+  color:#8B5E00;border-color:#C8A96E;background:#FBF5E8;
+  font-weight:700;letter-spacing:.05em}
+.tag.favoritt::before{content:"★ "}
+.tag.ikke-testet{color:var(--tekst-svak);border-color:var(--kant);background:var(--krem)}
+.tag.michelin{color:#8B1A2B;border-color:#D9B3BB;background:#FBF0F2;font-weight:600}
+.tag.michelin::before{content:"✦ "}
+.tag.pris{color:#5D4A7A;border-color:#CFC3DF;background:#F5F1FA;font-family:monospace;letter-spacing:.02em;font-weight:600}
 
 /* ---------- BILDER ---------- */
 .bilde-rad{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));margin-top:20px}
@@ -223,7 +283,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
 @media (max-width:600px){
   body{font-size:16px}
   .kort-rad{grid-template-columns:1fr}
-  .hero-tekst{padding-bottom:32px}
+  .hero-tekst{bottom:4%}
   .sprak{top:10px;right:10px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -245,66 +305,13 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
     <button id="btn-en" aria-pressed="false" onclick="settSprak('en')">EN</button>
   </div>
 
-  <!-- Illustrert hero -->
-  <svg class="hero-svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Italiensk landskap med sypresser og en by på en høyde">
-    <defs>
-      <linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#122A20"/>
-        <stop offset="100%" stop-color="#1C3A2E"/>
-      </linearGradient>
-    </defs>
-    <rect width="1200" height="300" fill="url(#himmel)"/>
-    <!-- måne + stjerner -->
-    <circle cx="1010" cy="62" r="21" fill="#C8A96E" opacity=".9"/>
-    <circle cx="1002" cy="56" r="18" fill="#1C3A2E"/>
-    <g fill="#C8A96E" opacity=".5">
-      <circle cx="150" cy="48" r="1.6"/><circle cx="260" cy="86" r="1.2"/>
-      <circle cx="420" cy="40" r="1.5"/><circle cx="620" cy="70" r="1.1"/>
-      <circle cx="810" cy="44" r="1.4"/><circle cx="1120" cy="96" r="1.3"/>
-      <circle cx="340" cy="120" r="1"/><circle cx="900" cy="112" r="1"/>
-    </g>
-    <!-- fjern -->
-    <path d="M0 210 L120 150 L210 195 L320 128 L430 200 L520 165 L610 205 L700 150 L820 200 L940 148 L1060 196 L1200 155 L1200 300 L0 300 Z" fill="#163024"/>
-    <!-- by på høyde -->
-    <g fill="#0E241B">
-      <path d="M700 150 L760 118 L830 150 Z"/>
-      <rect x="742" y="126" width="12" height="26"/>
-      <rect x="757" y="120" width="7" height="32"/>
-      <rect x="768" y="130" width="14" height="22"/>
-      <rect x="786" y="134" width="10" height="18"/>
-      <rect x="726" y="134" width="10" height="18"/>
-      <path d="M759.5 112 L764.5 120 L754.5 120 Z" fill="#C8A96E"/>
-    </g>
-    <!-- åser foran -->
-    <path d="M0 245 C180 205 300 258 470 235 C640 212 760 262 930 240 C1060 223 1140 252 1200 238 L1200 300 L0 300 Z" fill="#1F4132"/>
-    <!-- svingete vei -->
-    <path d="M600 300 C580 262 660 250 640 224 C624 203 690 196 700 180" stroke="#C8A96E" stroke-width="2.5" fill="none" opacity=".55" stroke-dasharray="9 7"/>
-    <!-- sypresser -->
-    <g fill="#0B1E16">
-      <ellipse cx="120" cy="238" rx="11" ry="42"/>
-      <ellipse cx="156" cy="246" rx="8" ry="32"/>
-      <ellipse cx="1078" cy="240" rx="12" ry="46"/>
-      <ellipse cx="1042" cy="250" rx="8" ry="30"/>
-      <ellipse cx="1110" cy="252" rx="7" ry="26"/>
-      <ellipse cx="392" cy="256" rx="7" ry="26"/>
-      <ellipse cx="416" cy="250" rx="9" ry="34"/>
-    </g>
-    <!-- olivengrein -->
-    <g stroke="#C8A96E" fill="#C8A96E" opacity=".7">
-      <path d="M40 96 C80 78 130 76 172 88" stroke-width="1.6" fill="none"/>
-      <ellipse cx="66" cy="82" rx="8" ry="3.4" transform="rotate(-24 66 82)"/>
-      <ellipse cx="98" cy="72" rx="8" ry="3.4" transform="rotate(-12 98 72)"/>
-      <ellipse cx="132" cy="72" rx="8" ry="3.4" transform="rotate(8 132 72)"/>
-      <ellipse cx="86" cy="96" rx="7" ry="3" transform="rotate(16 86 96)"/>
-      <ellipse cx="120" cy="94" rx="7" ry="3" transform="rotate(26 120 94)"/>
-      <circle cx="164" cy="88" r="3.2"/>
-    </g>
-  </svg>
-
-  <div class="hero-tekst">
-    <h1><em>La Dolce</em> Italia</h1>
-    <p data-no="Steder vi elsker, mat vi savner og tips vi hadde ønsket å fått selv"
-       data-en="Places we love, food we miss and the tips we wish someone had given us"></p>
+  <div class="hero-img-wrap">
+    <img class="hero-img" src="bilder/header-illustrasjon.jpg" alt="Illustrasjon av italiensk landskap med vinmark, pasta, pizza og en kystby om natten">
+    <div class="hero-tekst">
+      <h1><em>La Dolce</em> Italia</h1>
+      <p data-no="Steder vi elsker, mat vi savner og tips vi hadde ønsket å fått selv"
+         data-en="Places we love, food we miss and the tips we wish someone had given us"></p>
+    </div>
   </div>
   <div class="flis" aria-hidden="true"></div>
 </header>
@@ -338,6 +345,13 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
        data-en="Our mini guide to Rome. The restaurants we love (and a couple we want to try), plus neighbourhoods a bit off the usual tourist track. We've skipped the big monuments, since you already know those."></p>
   </div>
 
+    <div class="bilde-rad">
+    <figure class="foto stor" data-fil="bilder/roma-hero.jpg">
+      <img src="bilder/roma-hero.jpg" alt="Roma">
+      <figcaption data-no="Roma" data-en="Rome"></figcaption>
+    </figure>
+  </div>
+
   <div class="nav-byer" role="tablist" aria-label="Roma">
     <button class="tab" role="tab" aria-selected="true" data-tab="roma-rest" data-slug="restauranter" onclick="visTab('roma','roma-rest')" data-no="Restauranter" data-en="Restaurants"></button>
     <button class="tab" role="tab" aria-selected="false" data-tab="roma-pizza" data-slug="pizza" onclick="visTab('roma','roma-pizza')">Pizza</button>
@@ -349,119 +363,224 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
 
   <!-- Roma / Restauranter -->
   <div id="roma-rest" class="tabpanel" role="tabpanel">
-    <div class="bilde-rad">
-      <figure class="foto stor" data-fil="bilder/roma-hero.jpg">
-        <img src="bilder/roma-hero.jpg" alt="Roma">
-        <figcaption data-no="Roma om kvelden" data-en="Rome in the evening"></figcaption>
-      </figure>
-    </div>
+    
+    
 
     <div class="blokk">
       <h3 data-no="Restauranter" data-en="Restaurants"></h3>
+<div class="filter-rad" role="group" aria-label="Filtrer restauranter">
+      <button class="filter-knapp" id="f-favoritt-roma-rest" onclick="veksleFavoritt('roma-rest',this)" data-no="Vår favoritt ★" data-en="Our favourite ★">Vår favoritt ★</button>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-omraade-roma-rest" data-panel="roma-rest" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Område" onclick="apneDropdown('f-omraade-roma-rest')"><span class="dd-tekst" data-no="Område" data-en="Area">Område</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Område" data-en="Area" onclick="velgFilter('f-omraade-roma-rest','',this)">Område</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="prati" onclick="velgFilter('f-omraade-roma-rest','prati',this)">Prati</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="trastevere" onclick="velgFilter('f-omraade-roma-rest','trastevere',this)">Trastevere</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="pantheon" onclick="velgFilter('f-omraade-roma-rest','pantheon',this)">Pantheon</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="campo-de-fiori" onclick="velgFilter('f-omraade-roma-rest','campo-de-fiori',this)">Campo de' Fiori</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="via-del-corso" onclick="velgFilter('f-omraade-roma-rest','via-del-corso',this)">Via del Corso</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="ostiense" onclick="velgFilter('f-omraade-roma-rest','ostiense',this)">Ostiense</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="vatikanet" data-no="Vatikanet" data-en="Vatican" onclick="velgFilter('f-omraade-roma-rest','vatikanet',this)">Vatikanet</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-type-roma-rest" data-panel="roma-rest" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Type" onclick="apneDropdown('f-type-roma-rest')"><span class="dd-tekst" data-no="Type" data-en="Type">Type</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Type" data-en="Type" onclick="velgFilter('f-type-roma-rest','',this)">Type</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="pasta" onclick="velgFilter('f-type-roma-rest','pasta',this)">Pasta</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="romersk" data-no="Romersk" data-en="Roman" onclick="velgFilter('f-type-roma-rest','romersk',this)">Romersk</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="pizza" onclick="velgFilter('f-type-roma-rest','pizza',this)">Pizza</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="romana" onclick="velgFilter('f-type-roma-rest','romana',this)">Romana</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="napoletana" onclick="velgFilter('f-type-roma-rest','napoletana',this)">Napoletana</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="altaglio" onclick="velgFilter('f-type-roma-rest','altaglio',this)">Al taglio</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="trattoria" onclick="velgFilter('f-type-roma-rest','trattoria',this)">Trattoria</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="sjoemat" data-no="Sjømat" data-en="Seafood" onclick="velgFilter('f-type-roma-rest','sjoemat',this)">Sjømat</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="finedining" onclick="velgFilter('f-type-roma-rest','finedining',this)">Fine dining</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="middelhav" data-no="Middelhav" data-en="Mediterranean" onclick="velgFilter('f-type-roma-rest','middelhav',this)">Middelhav</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="sushi" onclick="velgFilter('f-type-roma-rest','sushi',this)">Sushi</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="japansk" data-no="Japansk" data-en="Japanese" onclick="velgFilter('f-type-roma-rest','japansk',this)">Japansk</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-pris-roma-rest" data-panel="roma-rest" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Pris" onclick="apneDropdown('f-pris-roma-rest')"><span class="dd-tekst" data-no="Pris" data-en="Price">Pris</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Pris" data-en="Price" onclick="velgFilter('f-pris-roma-rest','',this)">Pris</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$" onclick="velgFilter('f-pris-roma-rest','$',this)">$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$-$$" onclick="velgFilter('f-pris-roma-rest','$-$$',this)">$-$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$-$$$" onclick="velgFilter('f-pris-roma-rest','$$-$$$',this)">$$-$$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$$-$$$$" onclick="velgFilter('f-pris-roma-rest','$$$-$$$$',this)">$$$-$$$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$$$" onclick="velgFilter('f-pris-roma-rest','$$$$',this)">$$$$</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-michelin-roma-rest" data-panel="roma-rest" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Michelin" onclick="apneDropdown('f-michelin-roma-rest')"><span class="dd-tekst">Michelin</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" onclick="velgFilter('f-michelin-roma-rest','',this)">Michelin</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="stjerne" data-no="Michelin-stjerne" data-en="Michelin star" onclick="velgFilter('f-michelin-roma-rest','stjerne',this)">Michelin-stjerne</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="guide" data-no="Michelin guide" data-en="Michelin guide" onclick="velgFilter('f-michelin-roma-rest','guide',this)">Michelin guide</button>
+        </div>
+      </div>
+      <button class="filter-nullstill" id="f-nullstill-roma-rest" onclick="nullstillFilter('roma-rest')" data-no="Nullstill" data-en="Clear">Nullstill</button>
+    </div>
+    <p class="ingen-treff" id="ingen-treff-roma-rest" data-no="Ingen steder matcher filteret." data-en="No places match the filter."></p>
+
       <div class="kort-rad">
 
-        <article class="kort">
+        <article class="kort" data-pris="$$$$" data-type="finedining sjoemat middelhav" data-omraade="prati" data-michelin="stjerne" data-favoritt="false">
           <h4><a href="https://pulejo.it/" target="_blank" rel="noopener">Pulejo</a></h4>
           <p class="meta">Prati</p>
-          <p data-no="High end til god pris. Vi tok femretters tastingmeny og det var veldig bra. Kan anbefales!"
-             data-en="High end at a fair price. We had the five-course tasting menu and it was really good. Recommended."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Tastingmeny" data-en="Tasting menu"></span></div>
+          <p data-no="Fine dining med italiensk og middelhavskjøkken, og sjømat på menyen. Vi tok femretters tastingmeny og det var veldig bra. De har fått Michelin-stjerne siden vi var der, men prisene ser fortsatt overkommelige ut: 110 euro for fem retter og 140 euro for sju. De har à la carte også."
+             data-en="Fine dining with Italian and Mediterranean cooking, and seafood on the menu. We had the five-course tasting menu and it was really good. They've earned a Michelin star since our visit, but the prices still look reasonable: 110 euro for five courses and 140 euro for seven. They also have an à la carte menu."></p>
+          <div class="tags"><span class="tag michelin" data-no="Michelin-stjerne" data-en="Michelin star">Michelin-stjerne</span><span class="tag pris">$$$$</span><span class="tag gronn" data-no="Fine dining" data-en="Fine dining">Fine dining</span><span class="tag gronn" data-no="Sjømat" data-en="Seafood">Sjømat</span><span class="tag gronn" data-no="Middelhav" data-en="Mediterranean">Middelhav</span><span class="tag blaa">Prati</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$$-$$$$" data-type="finedining middelhav" data-omraade="pantheon" data-michelin="guide" data-favoritt="false">
           <h4><a href="https://www.casacoppelle.com/" target="_blank" rel="noopener">Casa Coppelle</a></h4>
           <p class="meta" data-no="Rett bak Pantheon / Piazza Navona" data-en="Just behind the Pantheon / Piazza Navona"></p>
-          <p data-no="Veldig kult sted og god mat. Vi anbefaler tastingmenyen."
-             data-en="Very cool spot and good food. We recommend the tasting menu."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Tastingmeny" data-en="Tasting menu"></span></div>
+          <p data-no="Fine dining med middelhavskjøkken og klassiske retter. Veldig kult sted og god mat. Vi anbefaler tastingmenyen. Restauranten er med i Michelin-guiden."
+             data-en="Fine dining with Mediterranean and classic cooking. Very cool spot and good food. We recommend the tasting menu. The restaurant is listed in the Michelin guide."></p>
+          <div class="tags"><span class="tag michelin" data-no="Michelin guide" data-en="Michelin guide">Michelin guide</span><span class="tag pris">$$$-$$$$</span><span class="tag gronn" data-no="Fine dining" data-en="Fine dining">Fine dining</span><span class="tag gronn" data-no="Middelhav" data-en="Mediterranean">Middelhav</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$$$" data-type="sushi japansk" data-omraade="via-del-corso" data-favoritt="true">
           <h4><a href="https://zumarestaurant.com/locations/rome/" target="_blank" rel="noopener">Zuma</a></h4>
           <p class="meta" data-no="På toppen av Fendi-hotellet, Via del Corso" data-en="Rooftop of the Fendi hotel, Via del Corso"></p>
-          <p data-no="Dyrt, men en opplevelse. 12/10."
-             data-en="Expensive, but an experience. 12/10."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Utsikt" data-en="View"></span></div>
+          <p data-no="I utgangspunktet en sushirestaurant, men de har også en del andre sharing-retter. Wagyu-biffen er helt sinnssykt god. Dyrt, men en opplevelse. 12/10."
+             data-en="Primarily a sushi restaurant, but they also do a range of other sharing dishes. The wagyu beef is outstanding. Expensive, but an experience. 12/10."></p>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$$$</span><span class="tag gronn">Sushi</span><span class="tag gronn" data-no="Japansk" data-en="Japanese">Japansk</span><span class="tag blaa">Via del Corso</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="trattoria romersk" data-omraade="ostiense" data-favoritt="true">
           <h4><a href="https://www.osteriafratellimori.it/" target="_blank" rel="noopener">Osteria Fratelli Mori</a></h4>
           <p class="meta" data-no="Piramide / Ostiense" data-en="Piramide / Ostiense"></p>
           <p data-no="Litt utenfor historisk sentrum, men du kan ta metroen hele veien. Absolutt verdt turen. Både pasta og hovedretter er bra. Og desserten! Usikkert om de har engelsk meny, men Google Translate er redningen i Italia."
              data-en="A bit outside the historic centre, but you can take the metro all the way. Well worth the trip, for both the pasta and the mains. And the desserts! Not sure they have an English menu, but Google Translate is your friend in Italy."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag blaa">Metro: Piramide</span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag gronn" data-no="Trattoria" data-en="Trattoria">Trattoria</span><span class="tag blaa">Ostiense</span><span class="tag blaa">Metro: Piramide</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="pasta" data-omraade="pantheon" data-favoritt="false">
           <h4><a href="https://www.cantinadeipapi.com/" target="_blank" rel="noopener">Cantina dei Papi</a></h4>
           <p class="meta" data-no="To ved Trevi, to i Trastevere" data-en="Two near Trevi, two in Trastevere"></p>
           <p data-no="Panini, eller planker med ost, skinke og grønnsaker. Veldig enkelt (man sitter på trekasser), men sykt godt og koselig. Vi har vært her flere ganger."
              data-en="Panini, or boards of cheese, ham and vegetables. Very simple (you sit on wooden crates), but seriously good and cosy. We keep coming back."></p>
-          <div class="tags"><span class="tag gronn" data-no="Enkelt &amp; godt" data-en="Simple &amp; good"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="trattoria romersk pasta" data-omraade="pantheon" data-michelin="guide" data-favoritt="false">
           <h4><a href="https://www.armandoalpantheon.it/en/" target="_blank" rel="noopener">Armando al Pantheon</a></h4>
           <p class="meta" data-no="Rett ved Pantheon" data-en="Right by the Pantheon"></p>
           <p data-no="God mat og god vin. En romersk klassiker."
              data-en="Good food and good wine. A Roman classic."></p>
-          <div class="tags"><span class="tag gronn" data-no="Klassiker" data-en="Classic"></span></div>
+          <div class="tags"><span class="tag michelin" data-no="Michelin guide" data-en="Michelin guide">Michelin guide</span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Trattoria" data-en="Trattoria">Trattoria</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
-        <article class="kort">
-          <h4><a href="https://www.instagram.com/vanda.roma/" target="_blank" rel="noopener">Vanda</a></h4>
+        <article class="kort" data-pris="$$-$$$" data-type="middelhav" data-omraade="trastevere" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d23262182-Reviews-Vanda-Rome_Lazio.html" target="_blank" rel="noopener">Vanda</a></h4>
           <p class="meta" data-no="Trastevere, en roligere gate" data-en="Trastevere, on a quieter street"></p>
           <p data-no="Koselig sted, bra pris og god mat. De er veldig gode på vin og har stort utvalg. Får du sommelieren i prat, er han utrolig flink og har stålkontroll. Man kan også kjøpe med deg vin fra hyllene."
              data-en="Cosy place, fair prices and good food. They know their wine and the list is long. If you get the sommelier talking he really knows his stuff. You can also buy bottles off the shelf to take with you."></p>
-          <div class="tags"><span class="tag vin" data-no="Vin" data-en="Wine"></span><span class="tag gronn" data-no="Bra pris" data-en="Good value"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Middelhav" data-en="Mediterranean">Middelhav</span><span class="tag gronn" data-no="Vin" data-en="Wine">Vin</span><span class="tag blaa">Trastevere</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="pasta romersk" data-omraade="campo-de-fiori" data-favoritt="false">
           <h4><a href="https://www.instagram.com/osteria_da_fortunata_italia/" target="_blank" rel="noopener">Osteria da Fortunata</a></h4>
           <p class="meta" data-no="Rett bak Campo de' Fiori" data-en="Just behind Campo de' Fiori"></p>
           <p data-no="Fersk pasta laget for hånd i restauranten, og alle de typisk romerske pastarettene. Veldig bra! Men det går ikke an å bestille bord, og køene er ofte lange til lunsj og middag."
              data-en="Fresh pasta made by hand in the restaurant, and all the classic Roman pasta dishes. Really good! But no reservations, and the queues get long at lunch and dinner."></p>
-          <div class="tags"><span class="tag gronn" data-no="Ingen booking, ofte kø" data-en="No booking, expect a queue"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag blaa">Campo de' Fiori</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Osteria del Tempo Perso Belsiana</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="pasta" data-omraade="via-del-corso" data-favoritt="false">
+          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g187791-d23480592-Reviews-Osteria_del_Tempo_Perso_Belsiana-Rome_Lazio.html" target="_blank" rel="noopener">Osteria del Tempo Perso Belsiana</a></h4>
           <p class="meta" data-no="Rett bak Via del Corso" data-en="Just behind Via del Corso"></p>
           <p data-no="Ligger rett bak handlegaten, men er ingen turistfelle. Beste trøffelpastaen vi har smakt! Sjømatpastaen er også nydelig. Perfekt lunsjpause i shoppingen. Litt dyrere enn steder som ikke ligger like sentralt, men overkommelig. Unngå pizzaen. Den er ikke stekt i steinovn og står nok bare på menyen for turistene."
              data-en="Right behind the shopping street, but not a tourist trap. The best truffle pasta we've tasted! The seafood pasta is lovely too. A perfect lunch break while shopping. A bit pricier than places further out, but reasonable. Skip the pizza. It isn't stone-baked and is probably only on the menu for tourists."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Lunsj" data-en="Lunch"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag blaa">Via del Corso</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Ristorante 34</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="romersk sjoemat middelhav" data-omraade="via-del-corso" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d696430-Reviews-Ristorante_Al_34-Rome_Lazio.html" target="_blank" rel="noopener">Ristorante Al 34</a></h4>
           <p class="meta" data-no="Rett bak Via del Corso" data-en="Just behind Via del Corso"></p>
-          <p data-no="Også rett bak handlegaten, og heller ingen turistfelle. Superkoselig til lunsj, og så søte tallerkener!"
-             data-en="Also just behind the shopping street, and also not a tourist trap. Lovely for lunch, and the plates are adorable."></p>
-          <div class="tags"><span class="tag gronn" data-no="Lunsj" data-en="Lunch"></span></div>
+          <p data-no="Også rett bak handlegaten, og heller ingen turistfelle. Romersk og italiensk kjøkken med sjømat på menyen. Superkoselig til lunsj, og så søte tallerkener!"
+             data-en="Also just behind the shopping street, and also not a tourist trap. Roman and Italian cooking with seafood on the menu. Lovely for lunch, and the plates are adorable."></p>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag gronn" data-no="Sjømat" data-en="Seafood">Sjømat</span><span class="tag gronn" data-no="Middelhav" data-en="Mediterranean">Middelhav</span><span class="tag blaa">Via del Corso</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Ciocario</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="pasta" data-omraade="prati" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d1380809-Reviews-Il_Ciociaro-Rome_Lazio.html" target="_blank" rel="noopener">Il Ciociaro</a></h4>
           <p class="meta">Prati</p>
           <p data-no="Pasta laget i parmesanhjul. Digg."
              data-en="Pasta made in a wheel of parmesan. Delicious."></p>
-          <div class="tags"><span class="tag gronn" data-no="Generelt tips" data-en="General tip"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Antico Falcone</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="trattoria romersk" data-omraade="prati" data-favoritt="true">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d1594564-Reviews-Antico_Falcone-Rome_Lazio.html" target="_blank" rel="noopener">Antico Falcone</a></h4>
           <p class="meta" data-no="Klassisk trattoria" data-en="Classic trattoria"></p>
           <p data-no="Klassisk, autentisk trattoria. Kjempegod amatriciana, og carciofi alla giudia er et must."
              data-en="A classic, authentic trattoria. Excellent amatriciana, and the carciofi alla giudia is a must."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Trattoria" data-en="Trattoria">Trattoria</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag blaa">Prati</span><span class="tag blaa">Metro: Ottaviano</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="pasta" data-omraade="via-del-corso" data-favoritt="true">
           <h4><a href="https://www.instagram.com/lanticaenotecaroma/" target="_blank" rel="noopener">L'Antica Enoteca</a></h4>
           <p class="meta" data-no="Rett ved Via del Corso" data-en="Right by Via del Corso"></p>
           <p data-no="Veldig god mat og aperitivo. Perfekt sted for en spritz i shoppingpausen, men det holder mer enn godt nok for et skikkelig måltid også."
              data-en="Really good food and aperitivo. Perfect for a spritz during a shopping break, but easily good enough for a proper meal too."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag vin">Aperitivo</span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag gronn">Aperitivo</span><span class="tag blaa">Via del Corso</span></div>
+        </article>
+
+        <article class="kort" data-pris="$$-$$$" data-type="pasta romersk" data-omraade="trastevere" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d14173461-Reviews-Nannarella-Rome_Lazio.html" target="_blank" rel="noopener">Nannarella</a></h4>
+          <p class="meta">Trastevere · Piazza di San Calisto</p>
+          <p data-no="Veldig god mat i hjertet av Trastevere. Kjent for klassiske romerske pastaretter. 4,7 på TripAdvisor og alltid full."
+             data-en="Really good food in the heart of Trastevere. Known for classic Roman pasta dishes. 4.7 on TripAdvisor and always packed."></p>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pasta" data-en="Pasta">Pasta</span><span class="tag gronn" data-no="Romersk" data-en="Roman">Romersk</span><span class="tag blaa">Trastevere</span></div>
+        </article>
+
+        <article class="kort" data-pris="$-$$" data-type="pizza romana" data-omraade="prati" data-favoritt="true">
+          <h4><a href="https://pizzeriagiacomelli.it/" target="_blank" rel="noopener">Giacomelli</a></h4>
+          <p class="meta" data-no="Prati, litt utenfor sentrum" data-en="Prati, a bit outside the centre"></p>
+          <p data-no="Nonna på 80+ er alltid på jobb. Ekte pizza romana, og etter vår mening den beste romerske pizzaen i Roma."
+             data-en="The 80-something nonna is always working. Proper pizza romana, and in our opinion the best Roman pizza in Rome."></p>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Romana</span><span class="tag blaa">Prati</span><span class="tag blaa">Metro: Ottaviano</span></div>
+        </article>
+
+        <article class="kort" data-pris="$-$$" data-type="pizza altaglio" data-omraade="vatikanet" data-favoritt="false">
+          <h4><a href="https://www.bonci.it/en/pizzarium-en/" target="_blank" rel="noopener">Bonci Pizzarium</a></h4>
+          <p class="meta" data-no="Bak Vatikanet, ved Cipro metrostasjon" data-en="Behind the Vatican, by Cipro metro"></p>
+          <p data-no="Pizza al taglio. Ofte lang kø, men verdt det!"
+             data-en="Pizza al taglio. Often a long queue, but worth it."></p>
+          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Al taglio</span><span class="tag blaa">Vatikanet</span><span class="tag blaa">Metro: Cipro</span></div>
+        </article>
+
+        <article class="kort" data-pris="$" data-type="pizza" data-omraade="prati" data-favoritt="false">
+          <h4><a href="https://www.bonci.it/en/bonci-bakery/" target="_blank" rel="noopener">Panificio Bonci</a></h4>
+          <p class="meta" data-no="Nær Mercato Trionfale" data-en="Near Mercato Trionfale"></p>
+          <p data-no="Samme folk som Pizzarium, bare mye mindre. Dette er mer et bakeri, med enkle versjoner av pizzaene og annet bakverk. Brødet er sykt digg! Perfekt hvis du vil smake, men ikke orker den lange køen. Det er gjerne litt kø her også rundt lunsj. Husk kølapp."
+             data-en="Same people as Pizzarium, just much smaller. This is more of a bakery, with simpler versions of the pizzas plus other baked goods. The bread is amazing! Perfect if you want a taste without the long queue, though it gets busy around lunch here too. Remember to take a number."></p>
+          <p data-no="Åpent hele dagen, men stengt 15–17 tirsdag til torsdag (sist vi sjekket). Ligger nær Mercato Trionfale, så de to kan fint kombineres."
+             data-en="Open all day, but closed 3–5 pm Tuesday to Thursday (last time we checked). It's close to Mercato Trionfale, so the two go well together."></p>
+          
+        <div class="tags"><span class="tag pris">$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa">Prati</span></div>
+        </article>
+
+        <article class="kort" data-pris="$$-$$$" data-type="pizza napoletana" data-omraade="campo-de-fiori" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d2291843-Reviews-Mariuccia-Rome_Lazio.html" target="_blank" rel="noopener">Mariuccia</a></h4>
+          <p class="meta" data-no="Rett bak Campo de' Fiori" data-en="Just behind Campo de' Fiori"></p>
+          <p data-no="Veldig god napolitansk pizza med tykkere bunn. Sykt gode forretter! Prøv fritert pizzadeig og supplì. Vi mener de har tre steder i Roma; det ene ligger ved siden av Osteria da Fortunata."
+             data-en="Very good Neapolitan pizza with a thicker base. The starters are excellent. Try the fried pizza dough and the supplì. We think they have three locations in Rome; one is next door to Osteria da Fortunata."></p>
+          
+        <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Napoletana</span><span class="tag blaa">Campo de' Fiori</span></div>
+        </article>
+
+        <article class="kort" data-pris="$$-$$$" data-type="pizza romana" data-omraade="pantheon" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d6748185-Reviews-Emma-Rome_Lazio.html" target="_blank" rel="noopener">Emma</a></h4>
+          <p class="meta" data-no="Sentro storico" data-en="Centro storico"></p>
+          <p data-no="Romersk pizza med tynn bunn. Vi har hørt masse bra, men har ikke testet selv ennå."
+             data-en="Roman pizza with a thin base. We've heard a lot of good things but haven't tried it ourselves yet."></p>
+          
+        <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Romana</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
       </div>
@@ -470,60 +589,88 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
   <div id="roma-pizza" class="tabpanel" role="tabpanel" hidden>
     <div class="blokk">
       <h3>Pizza</h3>
+    <div class="filter-rad" role="group" aria-label="Filtrer pizza">
+      <button class="filter-knapp" id="f-favoritt-roma-pizza" onclick="veksleFavoritt('roma-pizza',this)" data-no="Vår favoritt ★" data-en="Our favourite ★">Vår favoritt ★</button>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-type-roma-pizza" data-panel="roma-pizza" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Type" onclick="apneDropdown('f-type-roma-pizza')"><span class="dd-tekst" data-no="Type" data-en="Type">Type</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Type" data-en="Type" onclick="velgFilter('f-type-roma-pizza','',this)">Type</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="romana" onclick="velgFilter('f-type-roma-pizza','romana',this)">Romana</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="napoletana" onclick="velgFilter('f-type-roma-pizza','napoletana',this)">Napoletana</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="altaglio" onclick="velgFilter('f-type-roma-pizza','altaglio',this)">Al taglio</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-omraade-roma-pizza" data-panel="roma-pizza" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Område" onclick="apneDropdown('f-omraade-roma-pizza')"><span class="dd-tekst" data-no="Område" data-en="Area">Område</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Område" data-en="Area" onclick="velgFilter('f-omraade-roma-pizza','',this)">Område</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="prati" onclick="velgFilter('f-omraade-roma-pizza','prati',this)">Prati</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="campo-de-fiori" onclick="velgFilter('f-omraade-roma-pizza','campo-de-fiori',this)">Campo de' Fiori</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="pantheon" onclick="velgFilter('f-omraade-roma-pizza','pantheon',this)">Pantheon</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="vatikanet" data-no="Vatikanet" data-en="Vatican" onclick="velgFilter('f-omraade-roma-pizza','vatikanet',this)">Vatikanet</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-pris-roma-pizza" data-panel="roma-pizza" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Pris" onclick="apneDropdown('f-pris-roma-pizza')"><span class="dd-tekst" data-no="Pris" data-en="Price">Pris</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Pris" data-en="Price" onclick="velgFilter('f-pris-roma-pizza','',this)">Pris</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$" onclick="velgFilter('f-pris-roma-pizza','$',this)">$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$-$$" onclick="velgFilter('f-pris-roma-pizza','$-$$',this)">$-$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$-$$$" onclick="velgFilter('f-pris-roma-pizza','$$-$$$',this)">$$-$$$</button>
+        </div>
+      </div>
+      <button class="filter-nullstill" id="f-nullstill-roma-pizza" onclick="nullstillFilter('roma-pizza')" data-no="Nullstill" data-en="Clear">Nullstill</button>
+    </div>
+    <p class="ingen-treff" id="ingen-treff-roma-pizza" data-no="Ingen steder matcher filteret." data-en="No places match the filter."></p>
+
+
       <div class="kort-rad">
 
-        <article class="kort">
-          <h4>Giacomelli</h4>
+        <article class="kort" data-pris="$-$$" data-type="pizza romana" data-omraade="prati" data-favoritt="true">
+          <h4><a href="https://pizzeriagiacomelli.it/" target="_blank" rel="noopener">Giacomelli</a></h4>
           <p class="meta" data-no="Prati, litt utenfor sentrum" data-en="Prati, a bit outside the centre"></p>
           <p data-no="Nonna på 80+ er alltid på jobb. Ekte pizza romana, og etter vår mening den beste romerske pizzaen i Roma."
              data-en="The 80-something nonna is always working. Proper pizza romana, and in our opinion the best Roman pizza in Rome."></p>
-          <div class="tags"><span class="tag gull" data-no="Vår favoritt" data-en="Our favourite"></span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Romana</span><span class="tag blaa">Prati</span><span class="tag blaa">Metro: Ottaviano</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$-$$" data-type="pizza altaglio" data-omraade="vatikanet" data-favoritt="false">
           <h4><a href="https://www.bonci.it/en/pizzarium-en/" target="_blank" rel="noopener">Bonci Pizzarium</a></h4>
           <p class="meta" data-no="Bak Vatikanet, ved Cipro metrostasjon" data-en="Behind the Vatican, by Cipro metro"></p>
           <p data-no="Pizza al taglio. Ofte lang kø, men verdt det!"
              data-en="Pizza al taglio. Often a long queue, but worth it."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag blaa">Metro: Cipro</span></div>
+          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Al taglio</span><span class="tag blaa">Vatikanet</span><span class="tag blaa">Metro: Cipro</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$" data-type="pizza" data-omraade="prati" data-favoritt="false">
           <h4><a href="https://www.bonci.it/en/bonci-bakery/" target="_blank" rel="noopener">Panificio Bonci</a></h4>
           <p class="meta" data-no="Nær Mercato Trionfale" data-en="Near Mercato Trionfale"></p>
           <p data-no="Samme folk som Pizzarium, bare mye mindre. Dette er mer et bakeri, med enkle versjoner av pizzaene og annet bakverk. Brødet er sykt digg! Perfekt hvis du vil smake, men ikke orker den lange køen. Det er gjerne litt kø her også rundt lunsj. Husk kølapp."
              data-en="Same people as Pizzarium, just much smaller. This is more of a bakery, with simpler versions of the pizzas plus other baked goods. The bread is amazing! Perfect if you want a taste without the long queue, though it gets busy around lunch here too. Remember to take a number."></p>
           <p data-no="Åpent hele dagen, men stengt 15–17 tirsdag til torsdag (sist vi sjekket). Ligger nær Mercato Trionfale, så de to kan fint kombineres."
              data-en="Open all day, but closed 3–5 pm Tuesday to Thursday (last time we checked). It's close to Mercato Trionfale, so the two go well together."></p>
-          <div class="tags"><span class="tag gronn" data-no="Husk kølapp" data-en="Take a number"></span></div>
+          
+        <div class="tags"><span class="tag pris">$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa">Prati</span></div>
         </article>
 
-        <article class="kort">
-          <h4><a href="https://www.instagram.com/mariucciagroup/" target="_blank" rel="noopener">Mariuccia</a></h4>
+        <article class="kort" data-pris="$$-$$$" data-type="pizza napoletana" data-omraade="campo-de-fiori" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d2291843-Reviews-Mariuccia-Rome_Lazio.html" target="_blank" rel="noopener">Mariuccia</a></h4>
           <p class="meta" data-no="Rett bak Campo de' Fiori" data-en="Just behind Campo de' Fiori"></p>
           <p data-no="Veldig god napolitansk pizza med tykkere bunn. Sykt gode forretter! Prøv fritert pizzadeig og supplì. Vi mener de har tre steder i Roma; det ene ligger ved siden av Osteria da Fortunata."
              data-en="Very good Neapolitan pizza with a thicker base. The starters are excellent. Try the fried pizza dough and the supplì. We think they have three locations in Rome; one is next door to Osteria da Fortunata."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
+        <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Napoletana</span><span class="tag blaa">Campo de' Fiori</span></div>
         </article>
 
-        <article class="kort">
-          <h4><a href="https://emmapizzeria.com/en/" target="_blank" rel="noopener">Emma</a></h4>
+        <article class="kort" data-pris="$$-$$$" data-type="pizza romana" data-omraade="pantheon" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d6748185-Reviews-Emma-Rome_Lazio.html" target="_blank" rel="noopener">Emma</a></h4>
           <p class="meta" data-no="Sentro storico" data-en="Centro storico"></p>
           <p data-no="Romersk pizza med tynn bunn. Vi har hørt masse bra, men har ikke testet selv ennå."
              data-en="Roman pizza with a thin base. We've heard a lot of good things but haven't tried it ourselves yet."></p>
-          <div class="tags"><span class="tag gronn" data-no="Ikke testet ennå" data-en="Not tried yet"></span></div>
+          
+        <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Romana</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
-      </div>
-      <div class="bilde-rad">
-        <figure class="foto" data-fil="bilder/roma-pizza-1.jpg">
-          <img src="bilder/roma-pizza-1.jpg" alt="Pizza al taglio">
-          <figcaption data-no="Pizza al taglio hos Bonci" data-en="Pizza al taglio at Bonci"></figcaption>
-        </figure>
-        <figure class="foto" data-fil="bilder/roma-pizza-2.jpg">
-          <img src="bilder/roma-pizza-2.jpg" alt="Pizza">
-          <figcaption data-no="Legg inn bildetekst" data-en="Add a caption"></figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -532,38 +679,76 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
   <div id="roma-bar" class="tabpanel" role="tabpanel" hidden>
     <div class="blokk">
       <h3 data-no="Bar, vin &amp; aperitivo" data-en="Bars, wine &amp; aperitivo"></h3>
+    <div class="filter-rad" role="group" aria-label="Filtrer bar og gelato">
+      <button class="filter-knapp" id="f-favoritt-roma-bar" onclick="veksleFavoritt('roma-bar',this)" data-no="Vår favoritt ★" data-en="Our favourite ★">Vår favoritt ★</button>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-type-roma-bar" data-panel="roma-bar" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Type" onclick="apneDropdown('f-type-roma-bar')"><span class="dd-tekst" data-no="Type" data-en="Type">Type</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Type" data-en="Type" onclick="velgFilter('f-type-roma-bar','',this)">Type</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="vinbar" data-no="Vinbar" data-en="Wine bar" onclick="velgFilter('f-type-roma-bar','vinbar',this)">Vinbar</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="aperitivo" onclick="velgFilter('f-type-roma-bar','aperitivo',this)">Aperitivo</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="gelateria" onclick="velgFilter('f-type-roma-bar','gelateria',this)">Gelateria</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-omraade-roma-bar" data-panel="roma-bar" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Område" onclick="apneDropdown('f-omraade-roma-bar')"><span class="dd-tekst" data-no="Område" data-en="Area">Område</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Område" data-en="Area" onclick="velgFilter('f-omraade-roma-bar','',this)">Område</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="prati" onclick="velgFilter('f-omraade-roma-bar','prati',this)">Prati</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="campo-de-fiori" onclick="velgFilter('f-omraade-roma-bar','campo-de-fiori',this)">Campo de' Fiori</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="pantheon" onclick="velgFilter('f-omraade-roma-bar','pantheon',this)">Pantheon</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="via-del-corso" onclick="velgFilter('f-omraade-roma-bar','via-del-corso',this)">Via del Corso</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="trastevere" onclick="velgFilter('f-omraade-roma-bar','trastevere',this)">Trastevere</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="piazza-venezia" onclick="velgFilter('f-omraade-roma-bar','piazza-venezia',this)">Piazza Venezia</button>
+        </div>
+      </div>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-pris-roma-bar" data-panel="roma-bar" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Pris" onclick="apneDropdown('f-pris-roma-bar')"><span class="dd-tekst" data-no="Pris" data-en="Price">Pris</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Pris" data-en="Price" onclick="velgFilter('f-pris-roma-bar','',this)">Pris</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$" onclick="velgFilter('f-pris-roma-bar','$',this)">$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$-$$" onclick="velgFilter('f-pris-roma-bar','$-$$',this)">$-$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$-$$$" onclick="velgFilter('f-pris-roma-bar','$$-$$$',this)">$$-$$$</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="$$$-$$$$" onclick="velgFilter('f-pris-roma-bar','$$$-$$$$',this)">$$$-$$$$</button>
+        </div>
+      </div>
+      <button class="filter-nullstill" id="f-nullstill-roma-bar" onclick="nullstillFilter('roma-bar')" data-no="Nullstill" data-en="Clear">Nullstill</button>
+    </div>
+    <p class="ingen-treff" id="ingen-treff-roma-bar" data-no="Ingen steder matcher filteret." data-en="No places match the filter."></p>
+
+
       <div class="kort-rad">
 
-        <article class="kort">
-          <h4>Il Goccetto</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="vinbar aperitivo" data-omraade="campo-de-fiori" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d1034609-Reviews-Il_Goccetto-Rome_Lazio.html" target="_blank" rel="noopener">Il Goccetto</a></h4>
           <p class="meta" data-no="Mellom Castel Sant'Angelo og Campo de' Fiori" data-en="Between Castel Sant'Angelo and Campo de' Fiori"></p>
           <p data-no="Se etter skiltet «Vino e Olio» over døren, så har du funnet det."
              data-en="Look for the “Vino e Olio” sign above the door, and you've found it."></p>
-          <div class="tags"><span class="tag vin" data-no="Vinbar" data-en="Wine bar"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Vinbar" data-en="Wine bar">Vinbar</span><span class="tag gronn" data-no="Aperitivo" data-en="Aperitivo">Aperitivo</span><span class="tag blaa">Campo de' Fiori</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Vinoteca Novecento</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="vinbar" data-omraade="pantheon" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d1508975-Reviews-Vinoteca_Novecento-Rome_Lazio.html" target="_blank" rel="noopener">Vinoteca Novecento</a></h4>
           <p class="meta" data-no="Rett bak Pantheon, ved siden av Casa Coppelle" data-en="Behind the Pantheon, next to Casa Coppelle"></p>
           <p data-no="Veldig hyggelig eier og vert."
              data-en="The owner and host is lovely."></p>
-          <div class="tags"><span class="tag vin" data-no="Vinbar" data-en="Wine bar"></span></div>
+          <div class="tags"><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Vinbar" data-en="Wine bar">Vinbar</span><span class="tag blaa">Pantheon</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-pris="$$-$$$" data-type="aperitivo" data-omraade="via-del-corso" data-favoritt="true">
           <h4><a href="https://www.instagram.com/lanticaenotecaroma/" target="_blank" rel="noopener">L'Antica Enoteca</a></h4>
           <p class="meta" data-no="Rett ved Via del Corso" data-en="Right by Via del Corso"></p>
           <p data-no="Veldig god mat og aperitivo. Ligger rett ved Via del Corso."
              data-en="Really good food and aperitivo. Right by Via del Corso."></p>
-          <div class="tags"><span class="tag vin">Aperitivo</span><span class="tag gronn" data-no="Også restaurant" data-en="Also a restaurant"></span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn">Aperitivo</span><span class="tag blaa">Via del Corso</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Bistro D'oro</h4>
-          <p class="meta" data-no="Utsikt" data-en="Rooftop"></p>
-          <p data-no="Utrolig fin utsikt og gode drinker. Stive priser. Man kan spise her også."
-             data-en="A really lovely view and good drinks. Steep prices. You can eat here too."></p>
-          <div class="tags"><span class="tag gronn" data-no="Utsikt" data-en="View"></span></div>
+        <article class="kort" data-pris="$$$$" data-type="aperitivo" data-omraade="piazza-venezia" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g187791-d17795357-Reviews-Oro_Bistrot_Roma-Rome_Lazio.html" target="_blank" rel="noopener">Oro Bistrot</a></h4>
+          <p class="meta" data-no="Takterrasse ved Piazza Venezia" data-en="Rooftop by Piazza Venezia"></p>
+          <p data-no="Utrolig fin utsikt og gode drinker. Fra takterrassen ser du rett bort på Palazzo Valentini og ruinene ved Trajans forum, med Vittoriano-monumentet like ved. Stive priser. Man kan spise her også."
+             data-en="A really lovely view and good drinks. From the rooftop you look straight across at Palazzo Valentini and the ruins of Trajan's Forum, with the Vittoriano monument nearby. Steep prices. You can eat here too."></p>
+          <div class="tags"><span class="tag pris">$$$$</span><span class="tag gronn" data-no="Utsikt" data-en="View">Utsikt</span><span class="tag gronn" data-no="Aperitivo" data-en="Aperitivo">Aperitivo</span><span class="tag blaa">Piazza Venezia</span></div>
         </article>
 
       </div>
@@ -572,12 +757,12 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
     <div class="blokk">
       <h3>Gelato</h3>
       <div class="kort-rad">
-        <article class="kort">
+        <article class="kort" data-pris="$" data-type="gelateria" data-omraade="prati" data-favoritt="true">
           <h4><a href="https://www.gelateriaromana.com/" target="_blank" rel="noopener">Gelateria La Romana</a></h4>
-          <p class="meta" data-no="Vår favoritt" data-en="Our favourite"></p>
-          <p data-no="Den vi går tilbake til igjen og igjen."
-             data-en="The one we come back to again and again."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          <p class="meta" data-no="Flere steder i Roma" data-en="Several locations in Rome"></p>
+          <p data-no="Den vi går tilbake til igjen og igjen. De har flere steder rundt i Roma, men vi pleier å gå på den i Prati."
+             data-en="The one we come back to again and again. They have several locations around Rome, but we usually go to the one in Prati."></p>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$</span><span class="tag gronn" data-no="Gelateria" data-en="Gelateria">Gelateria</span><span class="tag blaa">Prati</span><span class="tag blaa" data-no="Flere steder" data-en="Several locations">Flere steder</span></div>
         </article>
 
         <article class="kort">
@@ -585,7 +770,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Tommelfingerregel" data-en="Rule of thumb"></p>
           <p data-no="Se etter steder der isen ligger nede i beholderen, gjerne med lokk. Ligger isen i høye hauger over kanten eller er formet som figurer, er det et tegn på dårlig kvalitet og mye tilsetningsstoffer. Ekte gelato smelter kjapt i romtemperatur."
              data-en="Look for places where the gelato sits down in the tub, ideally with a lid on. If it's piled high above the rim or sculpted into shapes, that's a sign of poor quality and lots of additives. Real gelato melts fast at room temperature."></p>
-          <div class="tags"><span class="tag gronn" data-no="Generelt tips" data-en="General tip"></span></div>
+          
         </article>
       </div>
     </div>
@@ -595,97 +780,123 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
   <div id="roma-steder" class="tabpanel" role="tabpanel" hidden>
     <div class="blokk">
       <h3 data-no="Steder og områder å besøke" data-en="Places and areas to visit"></h3>
+    <div class="filter-rad" role="group" aria-label="Filtrer steder">
+      <button class="filter-knapp" id="f-favoritt-roma-steder" onclick="veksleFavoritt('roma-steder',this)" data-no="Vår favoritt ★" data-en="Our favourite ★">Vår favoritt ★</button>
+      <div class="filter-dd">
+        <button type="button" class="filter-velg" id="f-type-roma-steder" data-panel="roma-steder" data-verdi="" aria-haspopup="listbox" aria-expanded="false" aria-label="Type" onclick="apneDropdown('f-type-roma-steder')"><span class="dd-tekst" data-no="Type" data-en="Type">Type</span></button>
+        <div class="filter-liste" role="listbox">
+          <button type="button" role="option" aria-selected="true" data-verdi="" data-no="Type" data-en="Type" onclick="velgFilter('f-type-roma-steder','',this)">Type</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="nabolag" data-no="Nabolag" data-en="Neighbourhood" onclick="velgFilter('f-type-roma-steder','nabolag',this)">Nabolag</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="marked" data-no="Marked" data-en="Market" onclick="velgFilter('f-type-roma-steder','marked',this)">Marked</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="severdighet" data-no="Severdighet" data-en="Sight" onclick="velgFilter('f-type-roma-steder','severdighet',this)">Severdighet</button>
+          <button type="button" role="option" aria-selected="false" data-verdi="utkikkspunkt" data-no="Utkikkspunkt" data-en="Viewpoint" onclick="velgFilter('f-type-roma-steder','utkikkspunkt',this)">Utkikkspunkt</button>
+        </div>
+      </div>
+      <button class="filter-nullstill" id="f-nullstill-roma-steder" onclick="nullstillFilter('roma-steder')" data-no="Nullstill" data-en="Clear">Nullstill</button>
+    </div>
+    <p class="ingen-treff" id="ingen-treff-roma-steder" data-no="Ingen steder matcher filteret." data-en="No places match the filter."></p>
+
+
       <div class="kort-rad">
 
-        <article class="kort">
-          <h4>Prati ⭐</h4>
+        <article class="kort" data-type="nabolag" data-favoritt="true">
+          <h4>Prati</h4>
           <p class="meta" data-no="Vårt favorittnabolag" data-en="Our favourite neighbourhood"></p>
           <p data-no="Koselig område over elven, ikke så folksomt som på andre siden. Her finnes en egen liten shoppinggate, og restauranter og barer er ofte billigere og med færre turister. Det er her vi pleier å bo, og her vi bodde da vi var i Roma i en måned."
              data-en="A lovely area across the river, much less crowded than the other side. It has its own little shopping street, and the restaurants and bars are often cheaper with fewer tourists. This is where we usually stay, and where we lived during our month in Rome."></p>
           <p data-no="Metro til Lepanto for shopping, eller Ottaviano for marked og det mer lokale."
              data-en="Metro to Lepanto for shopping, or Ottaviano for the market and the more local side."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag blaa">Metro: Lepanto / Ottaviano</span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa">Metro: Lepanto / Ottaviano</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="marked" data-favoritt="true">
           <h4>Mercato Trionfale</h4>
           <p class="meta">Prati</p>
           <p data-no="Et av Italias største matmarkeder. Her får du kjøpt det meste av oster, skinker og oljer, og de vakuumpakker for deg hvis du vil. Kombiner gjerne med Panificio Bonci."
              data-en="One of Italy's biggest food markets. Cheese, cured meats, oils and most things, really. They'll vacuum-pack for you if you ask. Combine it with Panificio Bonci."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag blaa">Metro: Ottaviano</span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag gronn" data-no="Marked" data-en="Market">Marked</span><span class="tag blaa">Metro: Ottaviano</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="marked" data-favoritt="false">
           <h4>Mercato di Testaccio</h4>
           <p class="meta">Testaccio</p>
           <p data-no="Street food-marked. Kan gås fra Piramide metrostopp."
              data-en="A street food market. Walkable from Piramide metro."></p>
-          <div class="tags"><span class="tag blaa">Metro: Piramide</span></div>
+          <div class="tags"><span class="tag gronn" data-no="Marked" data-en="Market">Marked</span><span class="tag blaa">Metro: Piramide</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="nabolag" data-favoritt="false">
           <h4>Trastevere</h4>
           <p class="meta" data-no="Over elven" data-en="Across the river"></p>
           <p data-no="Veldig koselig område med lokale barer (bar = kafé/bar i Italia) og restauranter. Ganske folksomt og festlig på kveldene. Ikke veldig langt å gå fra Campo de' Fiori."
              data-en="A really charming area with local bars (bar = café/bar in Italy) and restaurants. Busy and lively in the evenings. Not far to walk from Campo de' Fiori."></p>
-          <div class="tags"><span class="tag gronn" data-no="Kveld" data-en="Evening"></span></div>
+          <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="severdighet" data-favoritt="false">
           <h4 data-no="Castel Sant'Angelo på kvelden" data-en="Castel Sant'Angelo at night"></h4>
           <p class="meta" data-no="Ved elven, nær Peterskirken" data-en="By the river, near St Peter's"></p>
           <p data-no="En ganske magisk stemning å gå inn her på kvelden. Fin utsikt på toppen."
              data-en="There's a magic to going in here in the evening. Lovely view from the top."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          <div class="tags"><span class="tag gronn" data-no="Severdighet" data-en="Sight">Severdighet</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="nabolag" data-favoritt="false">
           <h4>Rione Monti</h4>
           <p class="meta" data-no="Bohemsk, kunst og vintage" data-en="Bohemian, art and vintage"></p>
           <p data-no="Kult bohemsk område, bra for kunst og vintageshopping. Flere kule vintagebutikker. Mercato Monti Urban Market er åpent lørdag og søndag. Litt spesielt, men du kan finne skatter. Vi kjøpte en vintage Max Mara-kåpe her."
              data-en="A cool bohemian area, good for art and vintage shopping. Several great vintage shops. Mercato Monti Urban Market is open Saturday and Sunday. A bit quirky, but there are treasures. We found a vintage Max Mara coat here."></p>
-          <div class="tags"><span class="tag gronn">Vintage</span><span class="tag blaa">Metro: Cavour / Colosseo</span></div>
+          <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa">Metro: Cavour / Colosseo</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="nabolag" data-favoritt="false">
           <h4>Quartiere Coppedè</h4>
           <p class="meta" data-no="Uvanlig arkitektur" data-en="Unusual architecture"></p>
           <p data-no="Lite område med spennende arkitektur. Det går ikke metro hit, men trikk og buss går. Eller ta det som en tur og gå."
              data-en="A small area with striking architecture. No metro here, but trams and buses go. Or make a walk of it."></p>
-          <div class="tags"><span class="tag blaa" data-no="Trikk / buss" data-en="Tram / bus"></span></div>
+          <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa" data-no="Trikk / buss" data-en="Tram / bus"></span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="nabolag" data-favoritt="false">
           <h4>Quartiere Ostiense</h4>
           <p class="meta">Ostiense</p>
           <p data-no="Masse street art, og så kan du se Piramide Cestia. Osteria Fratelli Mori ligger i dette området. Ikke så langt å gå til Trastevere herfra heller."
              data-en="Lots of street art, plus the Piramide Cestia. Osteria Fratelli Mori is in this area. It's not far to walk to Trastevere from here either."></p>
-          <div class="tags"><span class="tag gronn">Street art</span><span class="tag blaa">Metro: Piramide</span></div>
+          <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa">Metro: Piramide</span></div>
         </article>
 
-        <article class="kort">
+        <article class="kort" data-type="severdighet" data-favoritt="true">
           <h4>Torre Argentina Cat Sanctuary</h4>
           <p class="meta" data-no="Rett bak Pantheon" data-en="Just behind the Pantheon"></p>
           <p data-no="Flotte ruiner og masse katter. Vi går alltid innom for å hilse på kattene og donere litt til arbeidet de gjør."
              data-en="Beautiful ruins and a lot of cats. We always stop by to say hello and leave a small donation for the work they do."></p>
-          <div class="tags"><span class="tag gronn" data-no="Generelt tips" data-en="General tip"></span></div>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag gronn" data-no="Severdighet" data-en="Sight">Severdighet</span></div>
         </article>
 
-      </div>
+        <article class="kort" data-type="severdighet" data-favoritt="false">
+          <h4>Cimitero Acattolico</h4>
+          <p class="meta" data-no="Ostiense, rett ved Piramide Cestia" data-en="Ostiense, right by the Pyramid of Cestius"></p>
+          <p data-no="Den ikke-katolske gravlunden i Roma, også kjent som Den protestantiske kirkegård. Veldig fin å rusle rundt i, nesten som en stor park, pent beplantet med store trær. Det er også masse fine statuer og gravmonumenter å se på. Her ligger den norske historikeren Peter Andreas Munch begravet."
+             data-en="Rome's Non-Catholic Cemetery, also known as the Protestant Cemetery. Lovely to wander through, almost like a big park, beautifully planted with large trees. There are also plenty of fine statues and grave monuments to see. The Norwegian historian Peter Andreas Munch is buried here."></p>
+          <div class="tags"><span class="tag gronn" data-no="Severdighet" data-en="Sight">Severdighet</span><span class="tag blaa">Metro: Piramide</span></div>
+        </article>
 
-      <div class="bilde-rad">
-        <figure class="foto" data-fil="bilder/roma-prati.jpg">
-          <img src="bilder/roma-prati.jpg" alt="Prati">
-          <figcaption>Prati</figcaption>
-        </figure>
-        <figure class="foto" data-fil="bilder/roma-trastevere.jpg">
-          <img src="bilder/roma-trastevere.jpg" alt="Trastevere">
-          <figcaption>Trastevere</figcaption>
-        </figure>
-        <figure class="foto" data-fil="bilder/roma-katter.jpg">
-          <img src="bilder/roma-katter.jpg" alt="Torre Argentina">
-          <figcaption>Torre Argentina</figcaption>
-        </figure>
+        <article class="kort" data-type="utkikkspunkt" data-favoritt="false">
+          <h4>Piazzale Socrate</h4>
+          <p class="meta" data-no="Monte Mario, Balduina" data-en="Monte Mario, Balduina"></p>
+          <p data-no="Et utsiktspunkt på Monte Mario med utsikt mot Peterskirken og Vatikanet. Regnes som en av romernes egne favoritter, mer lokalt og rolig enn de mest kjente utsiktspunktene. Ikke besøkt selv ennå, men står på listen."
+             data-en="A viewpoint on Monte Mario with views towards St. Peter's Basilica and the Vatican. Considered one of the Romans' own favourites, more local and calm than the most famous viewpoints. Haven't visited ourselves yet, but it's on the list."></p>
+          <div class="tags"><span class="tag gronn" data-no="Utkikkspunkt" data-en="Viewpoint">Utkikkspunkt</span><span class="tag gronn" data-no="Ikke besøkt ennå" data-en="Not visited yet"></span><span class="tag blaa">Monte Mario</span><span class="tag blaa">Metro: Cipro</span></div>
+        </article>
+
+        <article class="kort" data-type="utkikkspunkt" data-favoritt="false">
+          <h4 data-no="Monte Mario / Vialetto degli Innamorati" data-en="Monte Mario / Vialetto degli Innamorati"></h4>
+          <p class="meta" data-no="Romas høyeste punkt, 139 meter" data-en="Rome's highest point, 139 metres"></p>
+          <p data-no="Utsiktspunktet på toppen av Monte Mario, Romas høyeste punkt. Kalles Vialetto degli Innamorati (de forelskedes gate) og er kjent som et romantisk sted med utsikt som strekker seg helt til Colli Albani. Ikke besøkt selv ennå, men står på listen."
+             data-en="The viewpoint at the top of Monte Mario, Rome's highest point. Known as Vialetto degli Innamorati (the lovers' lane), a romantic spot with views stretching all the way to the Colli Albani. Haven't visited ourselves yet, but it's on the list."></p>
+          <div class="tags"><span class="tag gronn" data-no="Utkikkspunkt" data-en="Viewpoint">Utkikkspunkt</span><span class="tag gronn" data-no="Ikke besøkt ennå" data-en="Not visited yet"></span><span class="tag blaa">Monte Mario</span><span class="tag blaa">Metro: Cipro</span></div>
+        </article>
+
       </div>
     </div>
   </div>
@@ -741,28 +952,28 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Luksus" data-en="Luxury"></p>
           <p data-no="Romas mest kjente luksusgate. Blant annet Gucci, Saint Laurent, Cartier, Celine og Prada."
              data-en="Rome's most famous luxury street. Gucci, Saint Laurent, Cartier, Celine and Prada, among others."></p>
-          <div class="tags"><span class="tag gull" data-no="Luksus" data-en="Luxury"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Via del Babuino</h4>
           <p class="meta" data-no="Piazza di Spagna → Piazza del Popolo" data-en="Piazza di Spagna → Piazza del Popolo"></p>
           <p data-no="Også luksus, ligger rett over Via Condotti. Her finner du blant annet Chanel, Valentino, D&amp;G og Stone Island."
              data-en="Also luxury, just above Via Condotti. Chanel, Valentino, D&amp;G and Stone Island, among others."></p>
-          <div class="tags"><span class="tag gull" data-no="Luksus" data-en="Luxury"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Via del Corso</h4>
           <p class="meta" data-no="Piazza Venezia → Piazza del Popolo" data-en="Piazza Venezia → Piazza del Popolo"></p>
           <p data-no="En lang gate med mer ordinære butikker: Sephora, Zara, Nike, Levi's og lignende."
              data-en="A long street with the more everyday shops: Sephora, Zara, Nike, Levi's and the like."></p>
-          <div class="tags"><span class="tag gronn">High street</span></div>
+          
         </article>
         <article class="kort">
           <h4>Via Cola di Rienzo</h4>
           <p class="meta">Prati</p>
           <p data-no="Her har de alt fra Zara Home til mer lokale butikker som selger skinn av god kvalitet."
              data-en="Everything from Zara Home to smaller local shops selling good quality leather."></p>
-          <div class="tags"><span class="tag gronn" data-no="Lokalt" data-en="Local"></span></div>
+          
         </article>
       </div>
     </div>
@@ -775,28 +986,27 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Via del Tritone, rett over Trevi" data-en="Via del Tritone, just above Trevi"></p>
           <p data-no="Romas mest kjente luksusvarehus, omtrent som Steen &amp; Strøm."
              data-en="Rome's best known luxury department store."></p>
-          <div class="tags"><span class="tag gull" data-no="Luksus" data-en="Luxury"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Euroma2</h4>
           <p class="meta" data-no="Utenfor byen" data-en="Outside the city"></p>
           <p data-no="Et av de største kjøpesentrene i Roma."
              data-en="One of the biggest malls in Rome."></p>
-          <div class="tags"><span class="tag gronn" data-no="Kjøpesenter" data-en="Mall"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Porta di Roma</h4>
           <p class="meta" data-no="Utenfor byen" data-en="Outside the city"></p>
           <p data-no="Også et stort kjøpesenter."
              data-en="Another large mall."></p>
-          <div class="tags"><span class="tag gronn" data-no="Kjøpesenter" data-en="Mall"></span></div>
+          
         </article>
       </div>
     </div>
   </div>
 
   <!-- Roma / Utenfor Roma -->
-  </div>
 </section>
 
 <!-- ==================== NAPOLI & SØR ==================== -->
@@ -813,15 +1023,15 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
   </div>
 
   <div id="nap-napoli" class="tabpanel" role="tabpanel">
-    <div class="bilde-rad">
-      <figure class="foto stor" data-fil="bilder/napoli-hero.jpg">
-        <img src="bilder/napoli-hero.jpg" alt="Napoli">
-        <figcaption data-no="Napoli" data-en="Naples"></figcaption>
-      </figure>
-    </div>
-
     <div class="blokk">
       <h3 data-no="Steder &amp; severdigheter" data-en="Places &amp; sights"></h3>
+      <div class="bilde-rad">
+        <figure class="foto stor" data-fil="bilder/napoli-hero.jpg">
+          <img src="bilder/napoli-hero.jpg" alt="Napoli">
+          <figcaption data-no="Napoli" data-en="Naples"></figcaption>
+        </figure>
+      </div>
+
       <p class="blokk-note" data-no="Her har vi foreløpig lagt inn det vi hadde. Send oss notatene deres, så fyller vi på."
          data-en="This is what we have so far. Send us your notes and we'll add more."></p>
       <div class="kort-rad">
@@ -830,14 +1040,14 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="UNESCO-listet sentrum" data-en="UNESCO-listed centre"></p>
           <p data-no="Spaccanapoli er den lange, smale gaten som deler gamlebyen i to. Gå den fra ende til ende. Det er her byen føles mest som seg selv."
              data-en="Spaccanapoli is the long, narrow street that cuts the old town in two. Walk it end to end. This is where the city feels most like itself."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Castel Sant'Elmo</h4>
           <p class="meta" data-no="Utkikkspunkt over byen" data-en="Viewpoint over the city"></p>
           <p data-no="Festningen ligger høyt over byen og har en av de fineste utsiktene over Napoli. Vi husker ikke alle detaljene, men det var absolutt et fint stopp."
              data-en="The fortress sits high above the city and has one of the best views over Naples. We don't remember all the details, but it was definitely a lovely stop."></p>
-          <div class="tags"><span class="tag gronn" data-no="Utsikt" data-en="View"></span></div>
+          
         </article>
       </div>
     </div>
@@ -850,7 +1060,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Napolitansk pizza" data-en="Neapolitan pizza"></p>
           <p data-no="Pizzaens fødested. Bestill en Margherita først, uansett hvor du går."
              data-en="The birthplace of pizza. Order a Margherita first, wherever you end up."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
 
         <article class="kort">
@@ -858,7 +1068,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Pizza fritta" data-en="Pizza fritta"></p>
           <p data-no="Napoli er også kjent for fritert pizza. Deigen fylles med ingredienser som ricotta, tomat og salami, brettes sammen og frityrstekes til den blir gyllen og sprø utenpå, mens den holder seg myk og varm inni. Populært street food, og en helt annen opplevelse enn den vanlige ovnsbakte pizzaen."
              data-en="Naples is also known for its fried pizza. The dough is filled with ingredients like ricotta, tomato and salami, folded over and deep-fried until golden and crisp on the outside, while staying soft and warm inside. Popular street food, and a completely different experience from the usual oven-baked pizza."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
 
         <article class="kort">
@@ -866,15 +1076,16 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Via San Carlo, rett foran Teatro San Carlo" data-en="Via San Carlo, right in front of Teatro San Carlo"></p>
           <p data-no="En helt fantastisk pizza. Da vi var der for 11 år siden var stedet bittelite, med kun to pizzaer på menyen: margherita og marinara. Det ser nå ut som de har utvidet både lokalet og menyen litt, men med 4,4 på TripAdvisor virker det som kvaliteten fortsatt er like god."
              data-en="Absolutely fantastic pizza. When we visited 11 years ago the place was tiny, with only two pizzas on the menu: margherita and marinara. It looks like they've since expanded both the space and the menu a bit, but with a 4.4 rating on TripAdvisor the quality still seems to hold up."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
       </div>
       <div class="bilde-rad">
         <figure class="foto stor" data-fil="bilder/napoli-in-bocca.jpg">
-          <img src="bilder/napoli-in-bocca.jpg" alt="Pizza fra Napoli In Bocca">
+          <img src="bilder/napoli-in-bocca.jpg" alt="Margherita og marinara hos Napoli In Bocca, for 11 år siden">
           <figcaption data-no="Margherita og marinara hos Napoli In Bocca, for 11 år siden" data-en="Margherita and marinara at Napoli In Bocca, 11 years ago"></figcaption>
         </figure>
       </div>
+
     </div>
 
   </div>
@@ -888,28 +1099,28 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Kystby på klipper" data-en="Clifftop coastal town"></p>
           <p data-no="Koselig by og perfekt base for Capri og Amalfikysten. Kjent for sitroner og limoncello. Ikke dra herfra uten å smake sitronpastaen!"
              data-en="A lovely town and the perfect base for Capri and the Amalfi coast. Famous for lemons and limoncello. Don't leave without trying the lemon pasta!"></p>
-          <div class="tags"><span class="tag gronn" data-no="Base" data-en="Base"></span><span class="tag gull" data-no="Sitronpasta" data-en="Lemon pasta"></span></div>
+          
         </article>
         <article class="kort">
           <h4 data-no="Positano &amp; Amalfikysten" data-en="Positano &amp; the Amalfi coast"></h4>
           <p class="meta" data-no="Kysten sør for Sorrento" data-en="The coast south of Sorrento"></p>
           <p data-no="Noe av det vakreste vi har sett, med fine strender og hav."
              data-en="Some of the most beautiful scenery we've ever seen, with lovely beaches and sea."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Capri</h4>
           <p class="meta" data-no="Båt fra Sorrento eller Napoli" data-en="Boat from Sorrento or Naples"></p>
           <p data-no="Ikonisk øy med blå grotter. Eksklusivt og kjempevakkert, men dyrt."
              data-en="Iconic island with blue grottoes. Exclusive and stunning, but expensive."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Dyrt" data-en="Pricey"></span></div>
+          
         </article>
         <article class="kort">
           <h4>Tropea</h4>
           <p class="meta">Calabria</p>
           <p data-no="Hvite hus på klipper over turkist hav, og en av de peneste strendene vi har besøkt. Kjent for den søte røde løken som vokser i området."
              data-en="White houses on cliffs above turquoise water, and one of the prettiest beaches we've visited. Famous for the sweet red onion grown in the area."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+          
         </article>
       </div>
     </div>
@@ -941,68 +1152,69 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Kystby · vår base i Puglia" data-en="Coastal town · our base in Puglia"></p>
       <p data-no="Sjarmerende kystby med en vakker gammel havn. Vi hadde base her og dro rundt derfra. Det er veldig koselig å gå å rusle i gatene om kvelden, og havnen er veldig pen ved solnedgang. Perfekt utgangspunkt for å utforske resten av kysten og Valle d'Itria."
          data-en="A charming coastal town with a beautiful old harbour. We based ourselves here and explored from there. It's lovely to wander the streets in the evening, and the harbour is beautiful at sunset. A perfect base for the rest of the coast and the Valle d'Itria."></p>
-      <div class="tags"><span class="tag gull" data-no="Vår base" data-en="Our base"></span></div>
+      
     </div>
 
     <div class="blokk">
       <h3 data-no="Steder" data-en="Places"></h3>
       <div class="kort-rad">
-        <article class="kort">
+        <article class="kort" data-type="severdighet" data-omraade="sentrum" data-favoritt="false">
           <h4 data-no="Den gamle havnen" data-en="The old harbour"></h4>
           <p class="meta" data-no="Sentrum" data-en="Centre"></p>
           <p data-no="Den gamle havnen er hjertet av Monopoli, spesielt på kvelden. Gå en tur langs kaien når solen går ned, det er en fin stemning med fiskebåtene og den varme lyset."
              data-en="The old harbour is the heart of Monopoli, especially in the evening. Walk along the quay as the sun goes down, the atmosphere is lovely with the fishing boats and warm light."></p>
-          <div class="tags"><span class="tag gronn" data-no="Kveld" data-en="Evening"></span></div>
+          
+          <div class="tags"><span class="tag gronn" data-no="Severdighet" data-en="Sight">Severdighet</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Bella Blu</h4>
+        <article class="kort" data-pris="$" data-type="gelateria" data-omraade="sentrum" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g652003-d23564005-Reviews-Gelateria_Bella_Blu_Monopoli-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Bella Blu</a></h4>
           <p class="meta" data-no="Gelateria ved havnen" data-en="Gelateria by the harbour"></p>
           <p data-no="Gelateria rett nede ved den gamle havnen. Perfekt for en is etter en kveldstur."
              data-en="Gelateria right down by the old harbour. Perfect for a gelato after an evening stroll."></p>
-          <div class="tags"><span class="tag gronn" data-no="Gelato" data-en="Gelato"></span></div>
+          
+          <div class="tags"><span class="tag pris">$</span><span class="tag gronn" data-no="Gelateria" data-en="Gelateria">Gelateria</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
         </article>
       </div>
       <div class="bilde-rad">
+        <figure class="foto" data-fil="bilder/puglia-monopoli.jpg">
+          <img src="bilder/puglia-monopoli.jpg" alt="Monopoli">
+          <figcaption>Monopoli</figcaption>
+        </figure>
         <figure class="foto" data-fil="bilder/monopoli-havn-kveld.jpg">
-          <img src="bilder/monopoli-havn-kveld.jpg" alt="Monopoli gammel havn om kvelden">
+          <img src="bilder/monopoli-havn-kveld.jpg" alt="Den gamle havnen om kvelden">
           <figcaption data-no="Den gamle havnen om kvelden" data-en="The old harbour in the evening"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-havn-solnedgang.jpg">
-          <img src="bilder/monopoli-havn-solnedgang.jpg" alt="Solnedgang over Monopoli havn">
+          <img src="bilder/monopoli-havn-solnedgang.jpg" alt="Solnedgang over havnen">
           <figcaption data-no="Solnedgang over havnen" data-en="Sunset over the harbour"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-bella-blu.jpg">
-          <img src="bilder/monopoli-bella-blu.jpg" alt="Gelato fra Bella Blu ved havnen">
+          <img src="bilder/monopoli-bella-blu.jpg" alt="Gelato fra Bella Blu">
           <figcaption data-no="Gelato fra Bella Blu" data-en="Gelato from Bella Blu"></figcaption>
         </figure>
       </div>
-    </div>
 
-    <div class="bilde-rad">
-      <figure class="foto stor" data-fil="bilder/puglia-monopoli.jpg">
-        <img src="bilder/puglia-monopoli.jpg" alt="Monopoli">
-        <figcaption>Monopoli</figcaption>
-      </figure>
     </div>
-
-    <div class="blokk">
+<div class="blokk">
       <h3 data-no="Restauranter" data-en="Restaurants"></h3>
       <div class="kort-rad">
-        <article class="kort">
-          <h4>Alchemicamente Chiné</h4>
+        <article class="kort" data-pris="$$-$$$" data-type="sjoemat pizza" data-omraade="utenfor" data-favoritt="true">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g652003-d23496058-Reviews-Alchemicamente_Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Alchemicamente Chiné</a></h4>
           <p class="meta" data-no="Strandbar ved Cala Pantano, litt utenfor sentrum" data-en="Beach bar at Cala Pantano, just outside the centre"></p>
           <p data-no="En av våre store favoritter i Monopoli. Ligger litt utenfor sentrumskjernen, rett ved stranden på en strandbar. Veldig god sjømat: vi spiste tunfisktartar, en fantastisk grillet blekksprut (den beste vi har hatt) og orecchiette med sverdfisk. Overraskende nok er de også kjent for pizzaen sin, selv om de ligger ved sjøen."
              data-en="One of our big favourites in Monopoli. It's a bit outside the town centre, right by the beach on a beach bar. Excellent seafood: we had tuna tartare, a fantastic grilled octopus (the best we've had) and orecchiette with swordfish. Surprisingly, they're also known for their pizza, even though they're right by the sea."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Sjømat" data-en="Seafood"></span></div>
+          
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Sjømat" data-en="Seafood">Sjømat</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
         </article>
 
-        <article class="kort">
-          <h4 data-no="Chiné Pizzeria (i sentrum)" data-en="Chiné Pizzeria (in the centre)"></h4>
+        <article class="kort" data-pris="$-$$" data-type="pizza" data-omraade="sentrum" data-favoritt="false">
+          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g652003-d13294281-Reviews-Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Chiné Pizzeria</a></h4>
           <p class="meta" data-no="Samme eier, inne i Monopoli" data-en="Same owner, inside Monopoli"></p>
           <p data-no="Samme folk som Alchemicamente Chiné driver også et pizzeria inne i sentrum. Der er det ofte lang kø for å få bord, men vi tok med pizza som takeaway og den var dødsgod."
              data-en="The same people behind Alchemicamente Chiné also run a pizzeria in the town centre. There's often a long queue for a table there, but we got pizza as takeaway and it was incredibly good."></p>
-          <div class="tags"><span class="tag gronn" data-no="Takeaway-tips" data-en="Takeaway tip"></span></div>
+          
+          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
         </article>
       </div>
       <div class="bilde-rad">
@@ -1012,88 +1224,102 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-blekksprut.jpg">
           <img src="bilder/monopoli-blekksprut.jpg" alt="Polpo arrosto con crema di patate">
-          <figcaption data-no="Polpo arrosto con crema di patate" data-en="Polpo arrosto con crema di patate"></figcaption>
+          <figcaption>Polpo arrosto con crema di patate</figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-orecchiette.jpg">
           <img src="bilder/monopoli-orecchiette.jpg" alt="Orecchiette med sverdfisk">
           <figcaption data-no="Orecchiette med sverdfisk" data-en="Orecchiette with swordfish"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-kveld.jpg">
-          <img src="bilder/monopoli-kveld.jpg" alt="Alchemicamente Chiné om kvelden">
+          <img src="bilder/monopoli-kveld.jpg" alt="Strandbaren om kvelden">
           <figcaption data-no="Strandbaren om kvelden" data-en="The beach bar in the evening"></figcaption>
         </figure>
       </div>
+
     </div>
 
     <div class="blokk">
       <h3 data-no="Strand &amp; beach club" data-en="Beaches &amp; beach clubs"></h3>
       <div class="kort-rad">
-        <article class="kort">
-          <h4>Lido Ottagono</h4>
-          <p class="meta" data-no="Beach club sør for Monopoli, mot Savelletri" data-en="Beach club south of Monopoli, towards Savelletri"></p>
-          <p data-no="En av de rimeligere beach clubene, og et veldig fint sted å sole seg. Vi bestilte solsenger på steinstranden ut mot klippene, med brede trappetrinn rett ned i havet. Det blåste en del da vi var der, deilig i varmen, men det ga også en del bølger. Det var bare gøy, det!"
-             data-en="One of the more affordable beach clubs, and a really lovely spot to sunbathe. We booked sunbeds on the rocky beach out towards the cliffs, with wide steps leading straight into the sea. It was quite windy when we were there, lovely in the heat, but it also meant a fair bit of waves. Which was just good fun!"></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Rimelig" data-en="Affordable"></span></div>
+        <article class="kort" data-type="tips" data-favoritt="false">
+          <h4 data-no="Strand i Puglia: slik funker det" data-en="Beaches in Puglia: how it works"></h4>
+          <p class="meta" data-no="Godt å vite" data-en="Good to know"></p>
+          <p data-no="Puglia har massevis av offentlige strender, men de blir fort fulle, særlig i helgene. Kom tidlig, eller legg deg heller ut på klippene der det er mulig. Det finnes også mange beach clubs som koster litt, men da får du egen solseng, som regel håndkle inkludert, og service helt ned til solsengen. Beach clubene fylles også raskt opp, så bestill i god tid. Uansett hva du velger, bestill solseng på nett før du drar, så slipper du bomtur. Vi brukte <a href="https://www.spiagge.it/" target="_blank" rel="noopener">spiagge.it</a> til å bestille."
+             data-en="Puglia has plenty of public beaches, but they fill up fast, especially at weekends. Come early, or find a spot on the rocks instead where possible. There are also many beach clubs that cost a bit, but you get your own sunbed, usually a towel included, and service right to your lounger. The beach clubs fill up quickly too, so book well ahead. Whichever you choose, book your sunbed online before you go so you don't turn up for nothing. We used <a href="https://www.spiagge.it/" target="_blank" rel="noopener">spiagge.it</a> to book."></p>
+          <div class="tags"><span class="tag gronn" data-no="Godt å vite" data-en="Good to know">Godt å vite</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Cala Monaci</h4>
+        <article class="kort" data-pris="$-$$" data-type="beachclub" data-omraade="utenfor" data-favoritt="true">
+          <h4><a href="https://no.tripadvisor.com/Attraction_Review-g1575039-d4774085-Reviews-Lido_Ottagono-Savelletri_Fasano_Province_of_Brindisi_Puglia.html" target="_blank" rel="noopener">Lido Ottagono</a></h4>
+          <p class="meta" data-no="Beach club sør for Monopoli, mot Savelletri" data-en="Beach club south of Monopoli, towards Savelletri"></p>
+          <p data-no="En av de rimeligere beach clubene, og et veldig fint sted å sole seg. Vi bestilte solsenger på steinstranden ut mot klippene, med brede trappetrinn rett ned i havet. Det blåste en del da vi var der, deilig i varmen, men det ga også en del bølger. Det var bare gøy, det! Husk å bestille solseng på forhånd, det blir fort fullt."
+             data-en="One of the more affordable beach clubs, and a really lovely spot to sunbathe. We booked sunbeds on the rocky beach out towards the cliffs, with wide steps leading straight into the sea. It was quite windy when we were there, lovely in the heat, but it also meant a fair bit of waves. Which was just good fun! Remember to book your sunbed in advance, it fills up quickly."></p>
+          
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Beach club" data-en="Beach club">Beach club</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
+        </article>
+
+        <article class="kort" data-pris="$" data-type="strand" data-omraade="utenfor" data-favoritt="true">
+          <h4><a href="https://beaches-searcher.com/en/beach/380203286/cala-monaci-beach" target="_blank" rel="noopener">Cala Monaci</a></h4>
           <p class="meta" data-no="Gratis strand ved klippene, Capitolo-området" data-en="Free beach by the cliffs, Capitolo area"></p>
           <p data-no="En liten strand ved klippene, og helt gratis. Du kan legge deg på selve stranden (men der blir det stappfullt) eller finne deg en plass langs klippene. Herfra kan du hoppe rett fra klippene ned i azurblått hav, helt fantastisk. Vi badet og solte oss her flere ganger, og tok med lunsj fra supermarkedet."
              data-en="A small beach by the cliffs, and completely free. You can lie on the beach itself (though it gets packed) or find a spot along the rocks. From here you can jump straight off the cliffs into azure water, absolutely wonderful. We swam and sunbathed here several times, bringing lunch from the supermarket."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Gratis" data-en="Free"></span><span class="tag gronn" data-no="Klippehopp" data-en="Cliff jumping"></span></div>
+          
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris" data-no="Gratis" data-en="Free">Gratis</span><span class="tag gronn" data-no="Strand" data-en="Beach">Strand</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Culto</h4>
+        <article class="kort" data-pris="$$$-$$$$" data-type="beachclub" data-omraade="utenfor" data-favoritt="false">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g652003-d33257937-Reviews-Kulto_Beach_Club-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Kulto Beach Club</a></h4>
           <p class="meta" data-no="Eksklusiv beach club, Capitolo-området" data-en="Upmarket beach club, Capitolo area"></p>
-          <p data-no="En veldig fin beach club. Her koster solsengene en del, men da får du håndkle og service på stranden, og kan bestille alt fra drikke til snacks rett ned til solsengen. Stranden har finere sand enn de mange rullesteinstrendene i området. Vi spiste lunsj her også, og maten var veldig god med fersk sjømat og fine smaker. Stive priser, men det er dessverre det du må regne med på en beach club i Puglia."
-             data-en="A really lovely beach club. The sunbeds aren't cheap, but you get a towel and beach service, and can order everything from drinks to snacks straight to your lounger. The sand here is finer than at the many pebble beaches in the area. We had lunch here too, and the food was very good, with fresh seafood and lovely flavours. Steep prices, but that's unfortunately what you have to expect at a beach club in Puglia."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Dyrt" data-en="Pricey"></span><span class="tag gronn" data-no="Sandstrand" data-en="Sandy beach"></span></div>
+          <p data-no="En veldig fin beach club. Her koster solsengene en del, men da får du håndkle og service på stranden, og kan bestille alt fra drikke til snacks rett ned til solsengen. Stranden har finere sand enn de mange rullesteinstrendene i området. Vi spiste lunsj her også, og maten var veldig god med fersk sjømat og fine smaker. Stive priser, men det er dessverre det du må regne med på en beach club i Puglia. Bestill solseng i god tid, her blir det fullt."
+             data-en="A really lovely beach club. The sunbeds aren't cheap, but you get a towel and beach service, and can order everything from drinks to snacks straight to your lounger. The sand here is finer than at the many pebble beaches in the area. We had lunch here too, and the food was very good, with fresh seafood and lovely flavours. Steep prices, but that's unfortunately what you have to expect at a beach club in Puglia. Book your sunbed well in advance, this place fills up."></p>
+          
+          <div class="tags"><span class="tag pris">$$$-$$$$</span><span class="tag gronn" data-no="Beach club" data-en="Beach club">Beach club</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
         </article>
 
-        <article class="kort">
-          <h4>Porto Ghiacciolo</h4>
+        <article class="kort" data-pris="$" data-type="strand" data-omraade="utenfor" data-favoritt="true">
+          <h4><a href="https://no.tripadvisor.com/Attraction_Review-g652003-d12787621-Reviews-Porto_Ghiacciolo_Beach-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Porto Ghiacciolo</a></h4>
           <p class="meta" data-no="Gratis strand ved Abbazia di Santo Stefano" data-en="Free beach by the Abbey of Santo Stefano"></p>
           <p data-no="En nydelig sandstrand i en liten bukt, med utsikt rett mot Abbazia di Santo Stefano, et forsvarskloster fra 1086 som troner over vika. Selve stranden er gratis, men vil du ha solseng må du betale for det, og det var relativt rimelig her. Vannet er litt kaldere enn andre steder, det er faktisk derfor den heter Ghiacciolo, som betyr istapp, men det gjør bare badingen ekstra deilig i varmen. Du kan svømme ut til en liten grotte og inn i den, og sjømaten i beach baren er fersk og god."
              data-en="A lovely sandy beach in a small bay, looking straight out at the Abbey of Santo Stefano, a defensive monastery from 1086 that towers over the cove. The beach itself is free, but you pay if you want a sunbed, and it was reasonably priced here. The water is a little colder than elsewhere, which is actually where the name Ghiacciolo (meaning icicle) comes from, but that just makes the swim extra refreshing in the heat. You can swim out to a little grotto and into it, and the seafood at the beach bar is fresh and good."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Gratis" data-en="Free"></span><span class="tag gronn" data-no="Sandstrand" data-en="Sandy beach"></span></div>
+          
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris" data-no="Gratis · solseng $-$$" data-en="Free · sunbed $-$$">Gratis · solseng $-$$</span><span class="tag gronn" data-no="Strand" data-en="Beach">Strand</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
         </article>
       </div>
       <div class="bilde-rad">
         <figure class="foto" data-fil="bilder/monopoli-lido-trapp.jpg">
-          <img src="bilder/monopoli-lido-trapp.jpg" alt="Trappetrinn ned i havet på Lido Ottagono">
+          <img src="bilder/monopoli-lido-trapp.jpg" alt="Lido Ottagono: trappen rett ned i havet">
           <figcaption data-no="Lido Ottagono: trappen rett ned i havet" data-en="Lido Ottagono: the steps straight into the sea"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-lido-bolger.jpg">
-          <img src="bilder/monopoli-lido-bolger.jpg" alt="Bølger mot klippene ved Lido Ottagono">
+          <img src="bilder/monopoli-lido-bolger.jpg" alt="Lido Ottagono: litt sjø den dagen">
           <figcaption data-no="Lido Ottagono: litt sjø den dagen" data-en="Lido Ottagono: a bit of a swell that day"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-cala-monaci-1.jpg">
-          <img src="bilder/monopoli-cala-monaci-1.jpg" alt="Klart vann ved Cala Monaci">
-          <figcaption data-no="Cala Monaci: det klare vannet" data-en="Cala Monaci: the clear water"></figcaption>
+          <img src="bilder/monopoli-cala-monaci-1.jpg" alt="Cala Monaci">
+          <figcaption>Cala Monaci</figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-cala-monaci-2.jpg">
-          <img src="bilder/monopoli-cala-monaci-2.jpg" alt="Lunsj på klippene ved Cala Monaci">
-          <figcaption data-no="Cala Monaci: lunsj på klippene" data-en="Cala Monaci: lunch on the rocks"></figcaption>
+          <img src="bilder/monopoli-cala-monaci-2.jpg" alt="Cala Monaci fra klippene">
+          <figcaption data-no="Cala Monaci fra klippene" data-en="Cala Monaci from the rocks"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-culto-strand.jpg">
-          <img src="bilder/monopoli-culto-strand.jpg" alt="Culto beach club">
-          <figcaption data-no="Culto: solsenger og fin sand" data-en="Culto: sunbeds and fine sand"></figcaption>
+          <img src="bilder/monopoli-culto-strand.jpg" alt="Kulto: solsenger og fin sand">
+          <figcaption data-no="Kulto: solsenger og fin sand" data-en="Kulto: sunbeds and fine sand"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-culto-mat.jpg">
-          <img src="bilder/monopoli-culto-mat.jpg" alt="Lunsj på Culto">
-          <figcaption data-no="Culto: fersk sjømat til lunsj" data-en="Culto: fresh seafood for lunch"></figcaption>
+          <img src="bilder/monopoli-culto-mat.jpg" alt="Kulto: fersk sjømat til lunsj">
+          <figcaption data-no="Kulto: fersk sjømat til lunsj" data-en="Kulto: fresh seafood for lunch"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-ghiacciolo-borg.jpg">
-          <img src="bilder/monopoli-ghiacciolo-borg.jpg" alt="Abbazia di Santo Stefano ved Porto Ghiacciolo">
+          <img src="bilder/monopoli-ghiacciolo-borg.jpg" alt="Porto Ghiacciolo: Abbazia di Santo Stefano over vika">
           <figcaption data-no="Porto Ghiacciolo: Abbazia di Santo Stefano over vika" data-en="Porto Ghiacciolo: the Abbey of Santo Stefano above the cove"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/monopoli-ghiacciolo-mat.jpg">
-          <img src="bilder/monopoli-ghiacciolo-mat.jpg" alt="Sjømat i beach baren på Porto Ghiacciolo">
+          <img src="bilder/monopoli-ghiacciolo-mat.jpg" alt="Porto Ghiacciolo: fritert fisk og sjømatsalat med utsikt">
           <figcaption data-no="Porto Ghiacciolo: fritert fisk og sjømatsalat med utsikt" data-en="Porto Ghiacciolo: fried fish and seafood salad with a view"></figcaption>
         </figure>
       </div>
+
     </div>
   </div>
 
@@ -1104,22 +1330,23 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Dramatisk kystby på klippene" data-en="Dramatic clifftop town"></p>
       <p data-no="Byen ligger rett på klippene, og man kan svømme i grottene under. Vil du på stranden, kom tidlig for det blir fullt utover dagen. På kvelden er det derimot helt magisk: finn deg en aperitivo med utsikt og se solnedgangen, eller kjøp en aperol spritz å ta med og sett deg ned på klippene for å se solen gå ned i havet. Det er også en koselig by å spise middag."
          data-en="The town sits right on the cliffs, and you can swim in the grottoes below. If you're heading to the beach, come early as it fills up through the day. In the evening it's a different story: find an aperitivo spot with a view and watch the sunset, or grab an Aperol Spritz to go and sit out on the cliffs as the sun goes down over the sea. It's also a lovely town for dinner."></p>
-      <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Strand: kom tidlig" data-en="Beach: come early"></span><span class="tag gronn" data-no="Kveld: aperitivo &amp; solnedgang" data-en="Evening: aperitivo &amp; sunset"></span></div>
+      
     </div>
-    <div class="bilde-rad">
-      <figure class="foto" data-fil="bilder/polignano-klippene.jpg">
-        <img src="bilder/polignano-klippene.jpg" alt="Polignano a Mare med klippene og Cala Monachile">
-        <figcaption data-no="Cala Monaci og klippene" data-en="Cala Monaci and the cliffs"></figcaption>
-      </figure>
-      <figure class="foto" data-fil="bilder/polignano-trapper.jpg">
-        <img src="bilder/polignano-trapper.jpg" alt="Trappene ned mot havet i Polignano a Mare">
-        <figcaption data-no="Trappene ned mot havet" data-en="The steps down to the sea"></figcaption>
-      </figure>
-      <figure class="foto" data-fil="bilder/polignano-solnedgang.jpg">
-        <img src="bilder/polignano-solnedgang.jpg" alt="Solnedgang fra klippene i Polignano a Mare">
-        <figcaption data-no="Solnedgang fra klippene" data-en="Sunset from the cliffs"></figcaption>
-      </figure>
-    </div>
+      <div class="bilde-rad">
+        <figure class="foto" data-fil="bilder/polignano-klippene.jpg">
+          <img src="bilder/polignano-klippene.jpg" alt="Polignano a Mare med klippene og Cala Monachile">
+          <figcaption data-no="Polignano a Mare med klippene og Cala Monachile" data-en="Polignano a Mare with the cliffs and Cala Monachile"></figcaption>
+        </figure>
+        <figure class="foto" data-fil="bilder/polignano-trapper.jpg">
+          <img src="bilder/polignano-trapper.jpg" alt="Trappene ned mot havet">
+          <figcaption data-no="Trappene ned mot havet" data-en="The steps down to the sea"></figcaption>
+        </figure>
+        <figure class="foto" data-fil="bilder/polignano-solnedgang.jpg">
+          <img src="bilder/polignano-solnedgang.jpg" alt="Solnedgang fra klippene">
+          <figcaption data-no="Solnedgang fra klippene" data-en="Sunset from the cliffs"></figcaption>
+        </figure>
+      </div>
+
   </div>
 
   <!-- Bari -->
@@ -1129,7 +1356,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Regionhovedstad med vakker gamleby" data-en="Regional capital with a beautiful old town"></p>
       <p data-no="Gamlebyen Bari Vecchia er vakker og full av karakter, med smale gater, fargerike balkongblomster og en avslappet kveldsstemning. Vi var der på kvelden og koste oss med å gå rundt og utforske. Det er mange koselige små butikker å stikke innom, perfekt hvis du er glad i å shoppe lokalt. Vi var der på en søndag og fikk ikke shoppet selv, men det er et godt tips for hverdager."
          data-en="The old town, Bari Vecchia, is beautiful and full of character, with narrow streets, colourful balcony flowers and a relaxed evening atmosphere. We visited in the evening and loved just wandering around. There are lots of lovely little shops to browse if you enjoy local shopping. We were there on a Sunday and didn't get to shop ourselves, but it's a good tip for weekdays."></p>
-      <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Shopping" data-en="Shopping"></span></div>
+      
     </div>
 
     <div class="blokk">
@@ -1140,7 +1367,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Puglia og Baris signaturpasta" data-en="Puglia's signature pasta"></p>
           <p data-no="Orecchiette er Puglia og Baris signaturpasta, og den lille øreformede pastaen finnes i mange varianter. Vi har spist den med sjømat og med enkel tomatsaus, begge deler veldig godt. Uansett saus er dette noe du bør bestille når du er her."
              data-en="Orecchiette is Puglia's signature pasta, and the little ear-shaped pasta comes in many variations. We've had it with seafood and with a simple tomato sauce, both really good. Whatever the sauce, this is something you should order while you're here."></p>
-          <div class="tags"><span class="tag gull" data-no="Bestill dette" data-en="Order this"></span></div>
+          
         </article>
 
         <article class="kort">
@@ -1148,12 +1375,12 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="En Bari-spesialitet" data-en="A Bari speciality"></p>
           <p data-no="En Bari-oppfinnelse fra slutten av 60-tallet. Spaghettien kokes ikke i vann, men stekes direkte i panna med tomatsaus, hvitløk og chili til den blir karamellisert og lett svart i kantene. Sprø, røykfull og litt spicy. Ikke gå fra Bari uten å ha prøvd denne."
              data-en="A Bari invention from the late 1960s. The spaghetti isn't boiled in water but cooked directly in the pan with tomato sauce, garlic and chilli until it caramelises and chars slightly at the edges. Crispy, smoky and a little spicy. Don't leave Bari without trying it."></p>
-          <div class="tags"><span class="tag gull" data-no="Bestill dette" data-en="Order this"></span></div>
+          
         </article>
       </div>
       <div class="bilde-rad">
         <figure class="foto" data-fil="bilder/bari-assassina.jpg">
-          <img src="bilder/bari-assassina.jpg" alt="Spaghetti all'assassina">
+          <img src="bilder/bari-assassina.jpg" alt="Spaghetti all'assassina med burrata">
           <figcaption data-no="Spaghetti all'assassina med burrata" data-en="Spaghetti all'assassina with burrata"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/bari-oliven.jpg">
@@ -1161,6 +1388,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <figcaption data-no="Lokale oliven" data-en="Local olives"></figcaption>
         </figure>
       </div>
+
     </div>
 
     <div class="blokk">
@@ -1171,15 +1399,16 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta">Piazza dell'Odegitria, rett ved katedralen</p>
           <p data-no="Koselig bar på plassen rett ved katedralen San Sabino. Perfekt for en aperitivo på kvelden. Holder åpent til godt over midnatt."
              data-en="A cosy bar on the square right by the cathedral of San Sabino. Perfect for an evening aperitivo. Open well past midnight."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag vin">Aperitivo</span></div>
+          <div class="tags"><span class="tag gronn">Aperitivo</span></div>
         </article>
       </div>
       <div class="bilde-rad">
         <figure class="foto stor" data-fil="bilder/bari-caffe-del-borgo.jpg">
-          <img src="bilder/bari-caffe-del-borgo.jpg" alt="Caffè del Borgo med katedralen San Sabino">
+          <img src="bilder/bari-caffe-del-borgo.jpg" alt="Caffè del Borgo med katedralen San Sabino i bakgrunnen">
           <figcaption data-no="Caffè del Borgo med katedralen San Sabino i bakgrunnen" data-en="Caffè del Borgo with the cathedral of San Sabino behind"></figcaption>
         </figure>
       </div>
+
     </div>
 
     <div class="blokk">
@@ -1190,7 +1419,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Strada Arco Basso, Bari Vecchia" data-en="Strada Arco Basso, Bari Vecchia"></p>
           <p data-no="Vi var i Bari på kvelden og fikk dessverre ikke sett dette, men det er absolutt noe vi har lyst til neste gang. I gatene i Bari Vecchia setter nonnaene seg ut med små trebord og former orecchiette for hånd rett utenfor hjemmene sine. Det er ikke et turistshow, det er bare slik de gjør det. Du kan kjøpe fersk pasta direkte fra dem for rundt fem euro kiloen. Kom om morgenen, helst mellom 8 og 12, for på ettermiddagen er de fleste ferdige for dagen."
              data-en="We visited Bari in the evening and unfortunately missed this, but it's something we really want to see next time. In the alleys of Bari Vecchia, local nonnas sit out with small wooden tables and shape orecchiette by hand right outside their homes. It's not a tourist show, it's just what they do. You can buy fresh pasta directly from them for around five euro a kilo. Come in the morning, ideally between 8 and 12, as most of them wrap up by the afternoon."></p>
-          <div class="tags"><span class="tag gronn" data-no="Kom på morgenen" data-en="Come in the morning"></span></div>
+          
         </article>
       </div>
     </div>
@@ -1203,15 +1432,8 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Den hvite byen på en høyde" data-en="The white town on a hilltop"></p>
       <p data-no="Hvitkalket by på en høyde i innlandet, og magisk på kvelden. Det er ikke så mange attraksjoner her, men det er nettopp det som er poenget. Ta deg god tid til å bare vandre i de søte gatene med små butikker og restauranter."
          data-en="A whitewashed town on a hilltop inland, and magical in the evening. There aren't many sights as such, but that's kind of the point. Take your time wandering the charming streets with their small shops and restaurants."></p>
-      <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Kveld" data-en="Evening"></span></div>
+      
     </div>
-    <div class="bilde-rad">
-      <figure class="foto stor" data-fil="bilder/puglia-ostuni.jpg">
-        <img src="bilder/puglia-ostuni.jpg" alt="Ostuni">
-        <figcaption>Ostuni</figcaption>
-      </figure>
-    </div>
-
     <div class="blokk">
       <h3 data-no="Aperitivo &amp; bar" data-en="Aperitivo &amp; bars"></h3>
       <div class="kort-rad">
@@ -1220,7 +1442,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Via Fina 8 · det klassiske solnedgangsstedet" data-en="Via Fina 8 · the classic sunset spot"></p>
           <p data-no="Det mest kjente stedet for aperitivo med utsikt i Ostuni. Terrasseplassene langs den svingete gaten har utsikt over de hvite husene og helt ut til Adriaterhavet. Veldig populært, og det kan fort bli fullt, så kom tidlig hvis du vil ha bord."
              data-en="The best-known aperitivo spot with a view in Ostuni. The terrace tables along the winding street look out over the white rooftops and all the way to the Adriatic. Very popular and it fills up fast, so come early if you want a table."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag vin">Aperitivo</span></div>
+          <div class="tags"><span class="tag gronn">Aperitivo</span></div>
         </article>
 
         <article class="kort">
@@ -1228,19 +1450,24 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Aperitivobar i gamlebyen" data-en="Aperitivo bar in the old town"></p>
           <p data-no="Vi tok en aperitivo her etter at vi hadde sett solnedgangen fra utkikkspunktet ved Borgo Antico Bistrot, som var fullt da vi kom. Utsikten er ikke like storslått som på Borgo, man ser ikke utover havet, men det er likevel veldig koselig stemning."
              data-en="We stopped here for an aperitivo after watching the sunset from the viewpoint by Borgo Antico Bistrot, which was full when we arrived. The view isn't as grand as at Borgo, you can't see out to the sea, but the atmosphere is really lovely."></p>
-          <div class="tags"><span class="tag vin">Aperitivo</span><span class="tag gronn" data-no="Koselig" data-en="Cosy"></span></div>
+          <div class="tags"><span class="tag gronn">Aperitivo</span></div>
         </article>
       </div>
       <div class="bilde-rad">
+        <figure class="foto" data-fil="bilder/puglia-ostuni.jpg">
+          <img src="bilder/puglia-ostuni.jpg" alt="Ostuni">
+          <figcaption>Ostuni</figcaption>
+        </figure>
         <figure class="foto" data-fil="bilder/ostuni-aperitivo-utsikt.jpg">
-          <img src="bilder/ostuni-aperitivo-utsikt.jpg" alt="Aperitivo med utsikt i Ostuni">
+          <img src="bilder/ostuni-aperitivo-utsikt.jpg" alt="Borgos terrasse med utsikt over Ostuni og havet">
           <figcaption data-no="Borgos terrasse med utsikt over Ostuni og havet" data-en="Borgo's terrace with views over Ostuni and the sea"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/ostuni-gelato.jpg">
-          <img src="bilder/ostuni-gelato.jpg" alt="Gelato i Ostuni">
-          <figcaption data-no="Gelato etter kveldsturen" data-en="Gelato after the evening walk"></figcaption>
+          <img src="bilder/ostuni-gelato.jpg" alt="Gelato etter kveldsturen">
+          <figcaption data-no="Gelato etter kveldsturen" data-en="Gelato after the evening stroll"></figcaption>
         </figure>
       </div>
+
     </div>
   </div>
 
@@ -1251,27 +1478,27 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta">Valle d'Itria</p>
       <p data-no="Utrolig koselig by, og et perfekt lunsj- og lunsjstopp etter Alberobello. Vi var her midt i siestaen, så det var veldig rolig, ingen butikker åpne, og vi bare vandret rolig rundt i gamlebyen og så på de søte hvite husene. Nyt det."
          data-en="An incredibly charming town, and a perfect lunch stop after Alberobello. We were here in the middle of siesta, so it was very quiet, no shops open, and we just wandered slowly through the old town looking at the lovely white houses. Enjoy it."></p>
-      <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag vin" data-no="God lokal vin" data-en="Good local wine"></span></div>
+      <div class="tags"><span class="tag gronn" data-no="God lokal vin" data-en="Good local wine"></span></div>
     </div>
 
     <div class="blokk">
       <h3 data-no="Mat" data-en="Food"></h3>
       <div class="kort-rad">
-        <article class="kort">
-          <h4 data-no="Restaurantnavn kommer" data-en="Restaurant name to follow"></h4>
+        <article class="kort" data-pris="$-$$" data-type="pizza pasta" data-omraade="sentrum" data-favoritt="false">
+          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g1056127-d12535817-Reviews-Belvedere_Ristorante_Pizzeria_Lounge-Locorotondo_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Belvedere Ristorante Pizzeria</a></h4>
           <p class="meta" data-no="Gamlebyen" data-en="Old town"></p>
-          <p data-no="Vi spiste en veldig god og rimelig lunsj her. Orecchiette med lokal ost på toppen og pizza diavola. Enkelt og veldig godt. Vi finner frem restaurantnavnet."
-             data-en="We had a really good and affordable lunch here. Orecchiette with local cheese on top and pizza diavola. Simple and very good. We'll add the restaurant name shortly."></p>
-          <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span><span class="tag gronn" data-no="Rimelig" data-en="Affordable"></span></div>
+          <p data-no="Vi spiste en veldig god og rimelig lunsj her. Orecchiette med lokal ost på toppen og pizza diavola. Enkelt og veldig godt."
+             data-en="We had a really good and affordable lunch here. Orecchiette with local cheese on top and pizza diavola. Simple and very good."></p>
+          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag gronn">Pasta</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
         </article>
       </div>
       <div class="bilde-rad">
         <figure class="foto" data-fil="bilder/locorotondo-gater.jpg">
-          <img src="bilder/locorotondo-gater.jpg" alt="Gatene i Locorotondo">
+          <img src="bilder/locorotondo-gater.jpg" alt="Gatene i gamlebyen">
           <figcaption data-no="Gatene i gamlebyen" data-en="The streets of the old town"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/locorotondo-kunst.jpg">
-          <img src="bilder/locorotondo-kunst.jpg" alt="Kniplingsinstallasjoner i gatene i Locorotondo">
+          <img src="bilder/locorotondo-kunst.jpg" alt="Knipling over gatene">
           <figcaption data-no="Knipling over gatene" data-en="Lace installations over the streets"></figcaption>
         </figure>
         <figure class="foto" data-fil="bilder/locorotondo-orecchiette.jpg">
@@ -1280,9 +1507,10 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
         </figure>
         <figure class="foto" data-fil="bilder/locorotondo-pizza.jpg">
           <img src="bilder/locorotondo-pizza.jpg" alt="Pizza diavola">
-          <figcaption data-no="Pizza diavola" data-en="Pizza diavola"></figcaption>
+          <figcaption>Pizza diavola</figcaption>
         </figure>
       </div>
+
     </div>
   </div>
 
@@ -1293,18 +1521,18 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta">UNESCO · Valle d'Itria</p>
       <p data-no="De ikoniske trulli-husene med koniske tak er verdt å se, og gatene er fine. Men et par timer holder godt, og unngå å spise lunsj her. Alt er ekstremt overpriset. Kombiner heller med Locorotondo og spis der. Ikke glem å gå opp til det lille utkikkspunktet på andre siden av byen, der får du en fin utsikt over alle de karakteristiske hustoppene."
          data-en="The iconic trulli houses with their conical roofs are worth seeing, and the streets are lovely. But a couple of hours is plenty, and skip lunch here. Everything is extremely overpriced. Combine it with Locorotondo and eat there instead. Don't forget to walk up to the small viewpoint on the other side of town, from there you get a lovely view over all the distinctive rooftops."></p>
-      <div class="tags"><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+      
     </div>
-    <div class="bilde-rad">
-      <figure class="foto" data-fil="bilder/puglia-alberobello-1.jpg">
-        <img src="bilder/puglia-alberobello-1.jpg" alt="Alberobello">
-        <figcaption data-no="Gatene i Alberobello" data-en="The streets of Alberobello"></figcaption>
-      </figure>
-      <figure class="foto" data-fil="bilder/puglia-alberobello-2.jpg">
-        <img src="bilder/puglia-alberobello-2.jpg" alt="Alberobello">
-        <figcaption data-no="Trulli-husene" data-en="The trulli houses"></figcaption>
-      </figure>
-    </div>
+      <div class="bilde-rad">
+        <figure class="foto" data-fil="bilder/puglia-alberobello-1.jpg">
+          <img src="bilder/puglia-alberobello-1.jpg" alt="Gatene i Alberobello">
+          <figcaption data-no="Gatene i Alberobello" data-en="The streets of Alberobello"></figcaption>
+        </figure>
+        <figure class="foto" data-fil="bilder/puglia-alberobello-2.jpg">
+          <img src="bilder/puglia-alberobello-2.jpg" alt="Trulli-husene">
+          <figcaption data-no="Trulli-husene" data-en="The trulli houses"></figcaption>
+        </figure>
+      </div>
   </div>
 
   <!-- Lokal mat -->
@@ -1320,15 +1548,15 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Puglia på en tallerken" data-en="Puglia on a plate"></p>
           <p data-no="Den lille øreformede pastaen er Puglia og Baris signaturpasta, og den lages for hånd her i området. Den finnes i mange varianter. Vi har spist den med sjømat og med enkel tomatsaus, og begge deler var veldig godt. Burrata på toppen er også vanlig og anbefales."
              data-en="The little ear-shaped pasta is Puglia's signature dish, made by hand in the area. It comes in many variations. We've had it with seafood and with a simple tomato sauce, both very good. Burrata on top is also common and highly recommended."></p>
-          <div class="tags"><span class="tag gull" data-no="Bestill dette" data-en="Order this"></span></div>
+          
         </article>
 
         <article class="kort">
           <h4>Burrata</h4>
           <p class="meta" data-no="Puglia er burratans hjemsted" data-en="Puglia is where burrata comes from"></p>
-          <p data-no="Burrata stammer fra Puglia, og her smaker den best. På mange restauranter kan du få den lagt oppå pastaen, og det er absolutt verdt å prøve. Men ikke gjør det med sjømatpasta. Det er som å banne i kirken! Sjømatpasta skal ikke serveres med ost, og det gjelder burrata også. Med tomatsaus derimot er det helt nydelig."
-             data-en="Burrata originates from Puglia, and this is where it's at its best. At many restaurants you can have it added on top of your pasta, and it's well worth trying. Just don't do it with seafood pasta. That's basically sacrilege! Seafood pasta should never be served with cheese, and burrata is no exception. With a tomato sauce though, it's wonderful."></p>
-          <div class="tags"><span class="tag gull" data-no="Bestill dette" data-en="Order this"></span></div>
+          <p data-no="Burrata stammer fra Puglia, og her smaker den best. På mange restauranter tilbyr de å legge burrata til pastaen, og det er absolutt verdt å prøve. Men ikke gjør det med sjømatpasta. Det er som å banne i kirken! Sjømatpasta skal ikke serveres med ost, og det gjelder burrata også. Med tomatsaus derimot er det helt nydelig."
+             data-en="Burrata originates from Puglia, and this is where it's at its best. At many restaurants they'll offer to add burrata to your pasta, and it's well worth trying. Just don't do it with seafood pasta. That's basically sacrilege! Seafood pasta should never be served with cheese, and burrata is no exception. With a tomato sauce though, it's wonderful."></p>
+          
         </article>
 
         <article class="kort">
@@ -1336,7 +1564,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Pugliansk snacks" data-en="Puglia's favourite snack"></p>
           <p data-no="Runde, sprø kjeks laget av mel, olivenolje, hvitvin og fennikel. De finnes i mange smaker som pepper, løk, chili og parmesan, men den tradisjonelle versjonen med bare olivenolje er faktisk min favoritt. Perfekt til et glass vin, eller bare som en liten snacks i løpet av dagen. Tar seg godt med hjem som gave."
              data-en="Round, crispy rings made from flour, olive oil, white wine and fennel seeds. They come in many flavours like pepper, onion, chilli and parmesan, but the traditional version with just olive oil is actually my favourite. Perfect with a glass of wine, or just as a little snack. A great thing to bring home as a gift."></p>
-          <div class="tags"><span class="tag gull" data-no="Ta med hjem" data-en="Bring home"></span></div>
+          
         </article>
 
         <article class="kort">
@@ -1344,7 +1572,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Puglia produserer over 40% av Italias olivenolje" data-en="Puglia produces over 40% of Italy's olive oil"></p>
           <p data-no="Puglia er Italias olivenoljehovestad. De mange masseriaene i regionen produserer olivenolje av svært høy kvalitet, og du merker raskt forskjellen fra det du finner hjemme. Kjøp gjerne med deg en flaske fra et lokalt sted. Vi kjøpte god olivenolje i Ostuni."
              data-en="Puglia is Italy's olive oil capital. The many masserie in the region produce very high quality olive oil, and you quickly notice the difference from what you find back home. Pick up a bottle from a local producer. We bought good olive oil in Ostuni."></p>
-          <div class="tags"><span class="tag gull" data-no="Ta med hjem" data-en="Bring home"></span></div>
+          
         </article>
 
         <article class="kort">
@@ -1352,15 +1580,23 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta" data-no="Baris svar på pizza" data-en="Bari's answer to pizza"></p>
           <p data-no="Tykk, myk focaccia med tomat og oliven, og en av de tingene som er vanskelig å slutte å spise. Det som skiller den fra vanlig focaccia er bunnen, som stekes i rikelig med olivenolje til den blir sprø og gyllen mens toppen forblir myk og luftig. En Bari-klassiker du finner overalt i regionen. Perfekt som rask lunsj eller snacks."
              data-en="Thick, soft focaccia with tomatoes and olives, and one of those things that's hard to stop eating. What sets it apart from regular focaccia is the base, which is baked in plenty of olive oil until it turns crispy and golden while the top stays soft and airy. A Bari classic you'll find everywhere in the region. Perfect for a quick lunch or snack."></p>
-          <div class="tags"><span class="tag gull" data-no="Bestill dette" data-en="Order this"></span></div>
+          
         </article>
 
         <article class="kort">
           <h4>Frisella</h4>
           <p class="meta" data-no="Friskt og enkelt" data-en="Fresh and simple"></p>
-          <p data-no="Et tørt, ringformet brød som bløtgjøres i vann og toppes med tomat, olivenolje og salt. Enkelt og utrolig friskt og godt i varmen. Vi kjøpte med oss hjem og har laget det hjemme flere ganger siden. Veldig god og lett lunsj."
-             data-en="A dry, ring-shaped bread soaked in water, then topped with tomato, olive oil and salt. Simple and incredibly fresh and good in the heat. We brought some home and have made it several times since. A really good and light lunch."></p>
-          <div class="tags"><span class="tag gronn" data-no="Prøv dette" data-en="Try this"></span></div>
+          <p data-no="Et tørt, ringformet brød som bløtgjøres i vann og toppes med tomat, olivenolje og salt. Enkelt og utrolig friskt og godt i varmen. Vi kjøpte med oss et par pakker hjem og har laget det hjemme noen ganger siden. Veldig god og lett lunsj."
+             data-en="A dry, ring-shaped bread soaked in water, then topped with tomato, olive oil and salt. Simple and incredibly fresh and good in the heat. We brought a couple of packs home and have made it a few times since. A really good and light lunch."></p>
+          
+        </article>
+
+        <article class="kort">
+          <h4 data-no="Oliven" data-en="Olives"></h4>
+          <p class="meta" data-no="Puglia er Italias olivenhage" data-en="Puglia is Italy's olive garden"></p>
+          <p data-no="Med over 60 millioner oliventrær er Puglia hjertet av italiensk olivenproduksjon. Olivenene her er gode og fyldige, og du finner dem overalt, som snacks, i antipasti og til brød. Enkelt og veldig godt, slik god råvare alltid er."
+             data-en="With over 60 million olive trees, Puglia is the heart of Italian olive production. The olives here are rich and full of flavour, and you'll find them everywhere, as a snack, in antipasti and with bread. Simple and very good, as great ingredients always are."></p>
+          
         </article>
 
         <article class="kort">
@@ -1368,7 +1604,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta">Valle d'Itria</p>
           <p data-no="Små kjøttruller fylt med ost og grillet over kull. Vi fikk aldri prøvd dem selv, men de dukker opp overalt i Valle d'Itria og lukter utrolig godt. Står høyt på lista neste gang."
              data-en="Small rolls of meat filled with cheese and grilled over charcoal. We never got around to trying them, but they're everywhere in the Valle d'Itria area and smell incredible. High on the list for next time."></p>
-          <div class="tags"><span class="tag gronn" data-no="Ikke prøvd ennå" data-en="Not tried yet"></span></div>
+          
         </article>
 
       </div>
@@ -1399,7 +1635,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Castelli Romani · tog fra Roma" data-en="Castelli Romani · train from Rome"></p>
       <p data-no="Området vi giftet oss i. Flott sted for å besøke vingårder, og lett å komme seg til med tog."
          data-en="The area where we got married. A lovely place to visit vineyards, and easy to reach by train."></p>
-      <div class="tags"><span class="tag vin" data-no="Vingårder" data-en="Vineyards"></span><span class="tag gull" data-no="Anbefalt" data-en="Highlight"></span></div>
+      <div class="tags"><span class="tag gronn" data-no="Vingårder" data-en="Vineyards"></span></div>
     </div>
   </div>
 
@@ -1410,7 +1646,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="25 km sør for Roma" data-en="25 km south of Rome"></p>
       <p data-no="Pavens feriested. Veldig fint og koselig, ligger rett ved Albanosjøen."
          data-en="The Pope's summer residence. Really pretty and charming, right by Lake Albano."></p>
-      <div class="tags"><span class="tag gronn" data-no="Dagstur" data-en="Day trip"></span></div>
+      
     </div>
   </div>
 
@@ -1421,7 +1657,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="30 km nord for Roma" data-en="30 km north of Rome"></p>
       <p data-no="Berømte villaer og hager. Vi har ikke vært, men har veldig lyst."
          data-en="Famous villas and gardens. We haven't been, but we really want to."></p>
-      <div class="tags"><span class="tag gronn" data-no="Ikke besøkt ennå" data-en="Not visited yet"></span></div>
+      
     </div>
   </div>
 
@@ -1432,7 +1668,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <p class="meta" data-no="Lazio-kysten, mellom Roma og Napoli" data-en="The Lazio coast, between Rome and Naples"></p>
       <p data-no="Koselig badeby med sandstrand og gamleby med barer og restauranter. Mest italienske turister, og litt rimeligere enn mange andre steder."
          data-en="A charming seaside town with a sandy beach and an old town full of bars and restaurants. Mostly Italian tourists, and a bit cheaper than many other places."></p>
-      <div class="tags"><span class="tag gronn" data-no="Bra pris" data-en="Good value"></span></div>
+      
     </div>
   </div>
 </section>
@@ -1552,6 +1788,164 @@ function lesHash(){
   }
 }
 
+// sorterer kort slik at favorittene alltid ligger øverst
+function sorterFavoritterForst(){
+  try {
+    // fast prioritert rekkefølge på favorittene
+    var prioritet = ['Zuma', 'Antico Falcone', 'Giacomelli', "L'Antica Enoteca", 'Osteria Fratelli Mori', 'Gelateria La Romana', 'Prati', 'Mercato Trionfale', 'Torre Argentina Cat Sanctuary'];
+
+    document.querySelectorAll('.kort-rad').forEach(function(rad){
+      var kort = Array.prototype.slice.call(rad.querySelectorAll(':scope > .kort'));
+      if (!kort.length) return;
+      var harFavoritt = kort.some(function(k){ return k.getAttribute('data-favoritt') === 'true'; });
+      if (!harFavoritt) return;
+      kort.sort(function(a, b){
+        // informasjonskort ligger alltid først
+        var ta = a.getAttribute('data-type') === 'tips' ? 0 : 1;
+        var tb = b.getAttribute('data-type') === 'tips' ? 0 : 1;
+        if (ta !== tb) return ta - tb;
+        var fa = a.getAttribute('data-favoritt') === 'true' ? 0 : 1;
+        var fb = b.getAttribute('data-favoritt') === 'true' ? 0 : 1;
+        if (fa !== fb) return fa - fb;
+        if (fa === 0) {
+          var navnA = (a.querySelector('h4') && a.querySelector('h4').textContent || '').trim();
+          var navnB = (b.querySelector('h4') && b.querySelector('h4').textContent || '').trim();
+          var pa = prioritet.indexOf(navnA); if (pa === -1) pa = 999;
+          var pb = prioritet.indexOf(navnB); if (pb === -1) pb = 999;
+          return pa - pb;
+        }
+        return 0;
+      });
+      kort.forEach(function(k){ rad.appendChild(k); });
+    });
+  } catch(e){}
+}
+
+// filtrering med dropdowns
+var favorittAktiv = {};
+
+function filtrer(panelId){
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+
+  var omraade = velgVerdi('f-omraade-' + panelId);
+  var type = velgVerdi('f-type-' + panelId);
+  var pris = velgVerdi('f-pris-' + panelId);
+  var michelin = velgVerdi('f-michelin-' + panelId);
+  var kunFavoritt = favorittAktiv[panelId] === true;
+
+  var harFilter = omraade || type || pris || michelin || kunFavoritt;
+  var antallSynlige = 0;
+
+  panel.querySelectorAll('.kort-rad > .kort').forEach(function(k){
+    var vis = true;
+    if (omraade && k.getAttribute('data-omraade') !== omraade) vis = false;
+    if (type && !harVerdi(k.getAttribute('data-type'), type)) vis = false;
+    if (pris && k.getAttribute('data-pris') !== pris) vis = false;
+    if (kunFavoritt && k.getAttribute('data-favoritt') !== 'true') vis = false;
+    if (michelin && !harVerdi(k.getAttribute('data-michelin'), michelin)) vis = false;
+
+    if (vis) { k.removeAttribute('data-skjult'); antallSynlige++; }
+    else { k.setAttribute('data-skjult', '1'); }
+  });
+
+  // marker aktive dropdowns
+  ['omraade','type','pris','michelin'].forEach(function(f){
+    var el = document.getElementById('f-' + f + '-' + panelId);
+    if (el) el.classList.toggle('aktiv', !!el.getAttribute('data-verdi'));
+  });
+
+  var nullstill = document.getElementById('f-nullstill-' + panelId);
+  if (nullstill) nullstill.classList.toggle('synlig', !!harFilter);
+
+  var ingenTreff = document.getElementById('ingen-treff-' + panelId);
+  if (ingenTreff) ingenTreff.style.display = (harFilter && antallSynlige === 0) ? 'block' : 'none';
+}
+
+// sjekker om en verdi finnes i en mellomromseparert attributtverdi
+function harVerdi(attributt, verdi){
+  if (!attributt) return false;
+  return (' ' + attributt + ' ').indexOf(' ' + verdi + ' ') !== -1;
+}
+
+function velgVerdi(id){
+  var el = document.getElementById(id);
+  return el ? (el.getAttribute('data-verdi') || '') : '';
+}
+
+function apneDropdown(id){
+  var knapp = document.getElementById(id);
+  if (!knapp) return;
+  var liste = knapp.parentNode.querySelector('.filter-liste');
+  var eraApen = liste.classList.contains('apen');
+  lukkAlleDropdowns();
+  if (!eraApen){
+    liste.classList.add('apen');
+    knapp.setAttribute('aria-expanded', 'true');
+  }
+}
+
+function lukkAlleDropdowns(){
+  document.querySelectorAll('.filter-liste.apen').forEach(function(l){ l.classList.remove('apen'); });
+  document.querySelectorAll('.filter-velg[aria-expanded="true"]').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+}
+
+function velgFilter(knappId, verdi, valgtKnapp){
+  var knapp = document.getElementById(knappId);
+  if (!knapp) return;
+  knapp.setAttribute('data-verdi', verdi);
+  knapp.classList.toggle('aktiv', !!verdi);
+
+  var tekstEl = knapp.querySelector('.dd-tekst');
+  if (tekstEl){
+    tekstEl.textContent = valgtKnapp.textContent;
+    var dno = valgtKnapp.getAttribute('data-no');
+    var den = valgtKnapp.getAttribute('data-en');
+    if (dno) tekstEl.setAttribute('data-no', dno); else tekstEl.removeAttribute('data-no');
+    if (den) tekstEl.setAttribute('data-en', den); else tekstEl.removeAttribute('data-en');
+  }
+
+  knapp.parentNode.querySelectorAll('.filter-liste button').forEach(function(b){
+    b.setAttribute('aria-selected', b === valgtKnapp ? 'true' : 'false');
+  });
+
+  lukkAlleDropdowns();
+  filtrer(knapp.getAttribute('data-panel'));
+}
+
+function veksleFavoritt(panelId, knapp){
+  favorittAktiv[panelId] = !favorittAktiv[panelId];
+  knapp.classList.toggle('aktiv', favorittAktiv[panelId]);
+  filtrer(panelId);
+}
+
+function nullstillFilter(panelId){
+  ['omraade','type','pris','michelin'].forEach(function(f){
+    var el = document.getElementById('f-' + f + '-' + panelId);
+    if (!el) return;
+    el.setAttribute('data-verdi', '');
+    el.classList.remove('aktiv');
+    var forste = el.parentNode.querySelector('.filter-liste button');
+    if (forste){
+      var t = el.querySelector('.dd-tekst');
+      if (t){
+        t.textContent = forste.textContent;
+        var dno = forste.getAttribute('data-no');
+        var den = forste.getAttribute('data-en');
+        if (dno) t.setAttribute('data-no', dno);
+        if (den) t.setAttribute('data-en', den);
+      }
+      el.parentNode.querySelectorAll('.filter-liste button').forEach(function(b){
+        b.setAttribute('aria-selected', b === forste ? 'true' : 'false');
+      });
+    }
+  });
+  favorittAktiv[panelId] = false;
+  var favKnapp = document.getElementById('f-favoritt-' + panelId);
+  if (favKnapp) favKnapp.classList.remove('aktiv');
+  filtrer(panelId);
+}
+
 function tomtBilde(img){
   var fig = img.closest && img.closest('.foto');
   if (fig) fig.classList.add('tom');
@@ -1579,6 +1973,7 @@ try {
   if (lagret === 'no' || lagret === 'en') startSprak = lagret;
 } catch(e){}
 settSprak(startSprak);
+sorterFavoritterForst();
 
 // hash-ruting: åpne riktig region/fane fra URL, og følg tilbakeknappen
 try { lesHash(); } catch(e){}
@@ -1601,9 +1996,10 @@ try {
 try {
   document.addEventListener('click', function(e){
     if (!e.target.closest('.nav-regioner')) veksleMeny(true);
+    if (!e.target.closest('.filter-dd')) lukkAlleDropdowns();
   });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') veksleMeny(true);
+    if (e.key === 'Escape') { veksleMeny(true); lukkAlleDropdowns(); }
   });
 } catch(e){}
 </script>
