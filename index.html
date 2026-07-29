@@ -48,18 +48,18 @@ a:hover{color:var(--gull-dyp)}
 /* ---------- HEADER ---------- */
 header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidden}
 .hero-svg{display:block;width:100%;height:auto;max-height:340px}
-.hero-img-wrap{position:relative;background:var(--gronn)}
+.hero-inner{max-width:1300px;margin:0 auto}
 .hero-img{display:block;width:100%;height:auto}
-.hero-tekst{position:absolute;left:0;right:0;bottom:6%;text-align:center;padding:0 22px}
+.hero-tekst{text-align:center;padding:28px 22px 32px}
 .hero-tekst h1{
-  font-size:clamp(2.6rem,7vw,4.4rem);
+  font-size:clamp(1.9rem,5.6vw,4.4rem);
   letter-spacing:.01em;
   color:var(--krem);
 }
 .hero-tekst h1 em{color:var(--gull);font-style:italic}
 .hero-tekst p{
-  margin:14px auto 0;max-width:34em;
-  color:#DCE5DF;font-size:1.02rem;font-weight:300;
+  margin:10px auto 0;max-width:34em;
+  color:#DCE5DF;font-size:clamp(.82rem,2.2vw,1.02rem);font-weight:300;line-height:1.45;
 }
 .flis{height:14px;background-repeat:repeat-x;background-size:28px 14px;
   background-image:
@@ -279,11 +279,13 @@ footer{background:var(--gronn);color:#C6D3CA;text-align:center;padding:48px 22px
 footer p{margin:0;font-size:.9rem}
 footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--gull);
   font-size:1.15rem;margin-bottom:8px}
+footer .disclaimer{max-width:52ch;margin:14px auto 0;font-size:.8rem;line-height:1.55;color:rgba(198,211,202,.72)}
+footer .credit{margin-top:16px;font-size:.72rem;letter-spacing:.08em;color:rgba(198,211,202,.5)}
 
 @media (max-width:600px){
   body{font-size:16px}
   .kort-rad{grid-template-columns:1fr}
-  .hero-tekst{bottom:4%}
+  .hero-tekst{padding:20px 18px 24px}
   .sprak{top:10px;right:10px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -305,13 +307,13 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
     <button id="btn-en" aria-pressed="false" onclick="settSprak('en')">EN</button>
   </div>
 
-  <div class="hero-img-wrap">
-    <img class="hero-img" src="bilder/header-illustrasjon.jpg" alt="Illustrasjon av italiensk landskap med vinmark, pasta, pizza og en kystby om natten">
-    <div class="hero-tekst">
-      <h1><em>La Dolce</em> Italia</h1>
-      <p data-no="Steder vi elsker, mat vi savner og tips vi hadde ønsket å fått selv"
-         data-en="Places we love, food we miss and the tips we wish someone had given us"></p>
-    </div>
+  <div class="hero-inner">
+  <img class="hero-img" src="bilder/header-illustrasjon.jpg" alt="Illustrasjon av italiensk landskap med vinmark, pasta, pizza og en kystby om natten">
+  <div class="hero-tekst">
+    <h1><em>La Dolce</em> Italia</h1>
+    <p data-no="Steder vi elsker, mat vi savner og tips vi hadde ønsket å fått selv"
+       data-en="Places we love, food we miss and the tips we wish someone had given us"></p>
+  </div>
   </div>
   <div class="flis" aria-hidden="true"></div>
 </header>
@@ -820,7 +822,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
         <article class="kort" data-type="marked" data-favoritt="false">
           <h4>Mercato di Testaccio</h4>
           <p class="meta">Testaccio</p>
-          <p data-no="Street food-marked. Kan gås fra Piramide metrostopp."
+          <p data-no="Street food-marked. Det er mulig å gå fra Piramide metrostopp."
              data-en="A street food market. Walkable from Piramide metro."></p>
           <div class="tags"><span class="tag gronn" data-no="Marked" data-en="Market">Marked</span><span class="tag blaa">Metro: Piramide</span></div>
         </article>
@@ -862,6 +864,16 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta">Ostiense</p>
           <p data-no="Masse street art, og så kan du se Piramide Cestia. Osteria Fratelli Mori ligger i dette området. Ikke så langt å gå til Trastevere herfra heller."
              data-en="Lots of street art, plus the Piramide Cestia. Osteria Fratelli Mori is in this area. It's not far to walk to Trastevere from here either."></p>
+          <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa">Metro: Piramide</span></div>
+        </article>
+
+        <article class="kort" data-type="nabolag" data-favoritt="false">
+          <h4>Testaccio</h4>
+          <p class="meta" data-no="Tradisjonelt matnabolag sør i sentrum" data-en="Traditional food neighbourhood, south of the centre"></p>
+          <p data-no="Vi var her bare på dagtid, og hovedgrunnen var Mercato di Testaccio (se eget kort). Ellers regnes nabolaget som hjertet av det ekte romerske kjøkkenet, med tradisjonelle trattoriaer."
+             data-en="We were only here in the daytime, mainly for the Mercato di Testaccio (see its own card). Beyond that, the neighbourhood is seen as the heart of traditional Roman cooking, with old-school trattorias."></p>
+          <p data-no="Vil du, kan du kombinere markedet med en liten tur innom to ting i nærheten. Monte Testaccio (også kalt Monte dei Cocci) er en kunstig høyde laget nesten bare av knuste antikke amforaer, altså potteskår. Det var romernes egen organiserte avfallsdynge gjennom flere hundre år. Vi så den bare i forbifarten og gikk ikke opp, men det er en artig ting å vite. Mattatoio di Testaccio, det gamle slakteriet fra rundt 1890, er i dag et kulturhus. Vi stakk innom, men det var ikke mye å se da vi var der, så sjekk gjerne hvilke utstillinger som går akkurat nå."
+             data-en="If you like, you can pair the market with a quick look at two things nearby. Monte Testaccio (also called Monte dei Cocci) is an artificial hill made almost entirely of broken ancient amphorae, that is potsherds. It was the Romans' own organised rubbish heap over several centuries. We only saw it in passing and didn't climb it, but it's a fun thing to know. The Mattatoio di Testaccio, the old slaughterhouse from around 1890, is now a cultural venue. We popped in, but there wasn't much to see when we were there, so check which exhibitions are on right now."></p>
           <div class="tags"><span class="tag gronn" data-no="Nabolag" data-en="Neighbourhood">Nabolag</span><span class="tag blaa">Metro: Piramide</span></div>
         </article>
 
@@ -1131,8 +1143,8 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
 <section id="puglia" role="tabpanel" hidden>
   <div class="intro">
     <h2>Puglia</h2>
-    <p data-no="En litt annen type Italia, som vi elsket! Villere natur med klipper, grotter og azurblått hav. Fantastisk fersk sjømat, orecchiette og olivenolje fra de mange masseriaene. Vi hadde base i Monopoli og dro rundt derfra. Byene ligger tett, så det er superlett å reise mellom dem. Vi hadde bil, men det går fint å leie en for noen dager."
-       data-en="A different kind of Italy, and we loved it! Wilder scenery with cliffs, grottoes and azure sea. Fantastic fresh seafood, orecchiette pasta and olive oil from the many masserie. We based ourselves in Monopoli and explored from there. The towns are close together, so getting between them is easy. We had a car, but renting one for a few days works fine."></p>
+    <p data-no="En litt annen type Italia, som vi elsket! Villere natur med klipper, grotter og azurblått hav. Fantastisk fersk sjømat, orecchiette og olivenolje fra de mange masseriaene. Vi hadde base i Monopoli og dro rundt derfra. Byene ligger tett, så det er superlett å reise mellom dem. Vi hadde bil, så det var lett å komme seg rundt. Vi anbefaler egentlig å leie egen bil, men det er helt sikkert mulig å komme seg rundt via Uber/taxi og/eller buss."
+       data-en="A different kind of Italy, and we loved it! Wilder scenery with cliffs, grottoes and azure sea. Fantastic fresh seafood, orecchiette pasta and olive oil from the many masserie. We based ourselves in Monopoli and explored from there. The towns are close together, so getting between them is easy. We had a car, so getting around was easy. We'd really recommend renting your own car, but it's definitely possible to get around by Uber/taxi and/or bus."></p>
   </div>
 
   <div class="nav-byer" role="tablist" aria-label="Puglia">
@@ -1199,22 +1211,20 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
 <div class="blokk">
       <h3 data-no="Restauranter" data-en="Restaurants"></h3>
       <div class="kort-rad">
-        <article class="kort" data-pris="$$-$$$" data-type="sjoemat pizza" data-omraade="utenfor" data-favoritt="true">
-          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g652003-d23496058-Reviews-Alchemicamente_Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Alchemicamente Chiné</a></h4>
-          <p class="meta" data-no="Strandbar ved Cala Pantano, litt utenfor sentrum" data-en="Beach bar at Cala Pantano, just outside the centre"></p>
-          <p data-no="En av våre store favoritter i Monopoli. Ligger litt utenfor sentrumskjernen, rett ved stranden på en strandbar. Veldig god sjømat: vi spiste tunfisktartar, en fantastisk grillet blekksprut (den beste vi har hatt) og orecchiette med sverdfisk. Overraskende nok er de også kjent for pizzaen sin, selv om de ligger ved sjøen."
-             data-en="One of our big favourites in Monopoli. It's a bit outside the town centre, right by the beach on a beach bar. Excellent seafood: we had tuna tartare, a fantastic grilled octopus (the best we've had) and orecchiette with swordfish. Surprisingly, they're also known for their pizza, even though they're right by the sea."></p>
-          
-          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Sjømat" data-en="Seafood">Sjømat</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
+        <article class="kort" data-pris="$-$$" data-type="pizza" data-omraade="sentrum" data-favoritt="false">
+          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g652003-d13294281-Reviews-Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Chinè Pizzeria</a></h4>
+          <p class="meta" data-no="Originalen, i sentrum av Monopoli" data-en="The original, in the centre of Monopoli"></p>
+          <p data-no="Dette er originalen, åpnet i 2017 av Francesco Marasciulo, en pizzaiolo som noen år senere vant tv-programmet Master Pizza Champion. Vi fikk stedet anbefalt av Airbnb-verten vår i Monopoli. Det er ofte lang kø for å få bord, men vi tok med pizza som takeaway, og den var dødsgod."
+             data-en="This is the original, opened in 2017 by Francesco Marasciulo, a pizzaiolo who a few years later won the TV show Master Pizza Champion. Our Airbnb host in Monopoli recommended it to us. There's often a long queue for a table, but we got pizza as takeaway and it was incredibly good."></p>
+          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
         </article>
 
-        <article class="kort" data-pris="$-$$" data-type="pizza" data-omraade="sentrum" data-favoritt="false">
-          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g652003-d13294281-Reviews-Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Chiné Pizzeria</a></h4>
-          <p class="meta" data-no="Samme eier, inne i Monopoli" data-en="Same owner, inside Monopoli"></p>
-          <p data-no="Samme folk som Alchemicamente Chiné driver også et pizzeria inne i sentrum. Der er det ofte lang kø for å få bord, men vi tok med pizza som takeaway og den var dødsgod."
-             data-en="The same people behind Alchemicamente Chiné also run a pizzeria in the town centre. There's often a long queue for a table there, but we got pizza as takeaway and it was incredibly good."></p>
-          
-          <div class="tags"><span class="tag pris">$-$$</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Sentrum" data-en="Town centre">Sentrum</span></div>
+        <article class="kort" data-pris="$$-$$$" data-type="sjoemat pizza" data-omraade="utenfor" data-favoritt="true">
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g652003-d23496058-Reviews-Alchemicamente_Chine-Monopoli_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Alchemicamente Chinè</a></h4>
+          <p class="meta" data-no="Strandbar ved Cala Pantano, litt utenfor sentrum" data-en="Beach bar at Cala Pantano, just outside the centre"></p>
+          <p data-no="Sommer- og sjøutgaven av Chinè, åpnet etter pizzeriaen som et samarbeid med cocktailbaren Alchemico (derav navnet). En av våre store favoritter i Monopoli, rett ved stranden litt utenfor sentrumskjernen. Veldig god sjømat: vi spiste tunfisktartar, en fantastisk grillet blekksprut (den beste vi har hatt) og orecchiette med sverdfisk. De har pizza her også, og vi opplevde at mange kom hit nettopp for å spise pizza. Den har fått dårlig score på TripAdvisor, men vi var veldig fornøyd med både service og mat, så ikke la deg skremme av det."
+             data-en="The summer and seaside version of Chinè, opened after the pizzeria as a collaboration with the cocktail bar Alchemico (hence the name). One of our big favourites in Monopoli, right by the beach a little outside the centre. Excellent seafood: we had tuna tartare, a fantastic grilled octopus (the best we've had) and orecchiette with swordfish. They serve pizza here too, and we noticed a lot of people came specifically for the pizza. It's had a poor score on TripAdvisor, but we were very happy with both the service and the food, so don't let that put you off."></p>
+          <div class="tags"><span class="tag favoritt" data-no="Vår favoritt" data-en="Our favourite"></span><span class="tag pris">$$-$$$</span><span class="tag gronn" data-no="Sjømat" data-en="Seafood">Sjømat</span><span class="tag gronn" data-no="Pizza" data-en="Pizza">Pizza</span><span class="tag blaa" data-no="Utenfor sentrum" data-en="Outside centre">Utenfor sentrum</span></div>
         </article>
       </div>
       <div class="bilde-rad">
@@ -1244,8 +1254,9 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
         <article class="kort" data-type="tips" data-favoritt="false">
           <h4 data-no="Strand i Puglia: slik funker det" data-en="Beaches in Puglia: how it works"></h4>
           <p class="meta" data-no="Godt å vite" data-en="Good to know"></p>
-          <p data-no="Puglia har massevis av offentlige strender, men de blir fort fulle, særlig i helgene. Kom tidlig, eller legg deg heller ut på klippene der det er mulig. Det finnes også mange beach clubs som koster litt, men da får du egen solseng, som regel håndkle inkludert, og service helt ned til solsengen. Beach clubene fylles også raskt opp, så bestill i god tid. Uansett hva du velger, bestill solseng på nett før du drar, så slipper du bomtur. Vi brukte <a href="https://www.spiagge.it/" target="_blank" rel="noopener">spiagge.it</a> til å bestille."
-             data-en="Puglia has plenty of public beaches, but they fill up fast, especially at weekends. Come early, or find a spot on the rocks instead where possible. There are also many beach clubs that cost a bit, but you get your own sunbed, usually a towel included, and service right to your lounger. The beach clubs fill up quickly too, so book well ahead. Whichever you choose, book your sunbed online before you go so you don't turn up for nothing. We used <a href="https://www.spiagge.it/" target="_blank" rel="noopener">spiagge.it</a> to book."></p>
+          <p data-no="Puglia har massevis av offentlige strender, men de blir fort fulle, særlig i helgene. Kom tidlig, eller legg deg heller ut på klippene der det er mulig. Det finnes også mange beach clubs som koster litt, men da får du egen solseng, som regel håndkle inkludert, og service helt ned til solsengen. Beach clubene fylles også raskt opp, så bestill i god tid. Uansett hva du velger, bestill solseng på nett før du drar, så slipper du bomtur."
+             data-en="Puglia has plenty of public beaches, but they fill up fast, especially at weekends. Come early, or find a spot on the rocks instead where possible. There are also many beach clubs that cost a bit, but you get your own sunbed, usually a towel included, and service right to your lounger. The beach clubs fill up quickly too, so book well ahead. Whichever you choose, book your sunbed online before you go so you don't turn up for nothing."></p>
+          <p><span data-no="Vi brukte" data-en="We used">Vi brukte</span> <a href="https://www.spiagge.it/" target="_blank" rel="noopener">spiagge.it</a> <span data-no="til å bestille solsenger." data-en="to book sunbeds.">til å bestille solsenger.</span></p>
           <div class="tags"><span class="tag gronn" data-no="Godt å vite" data-en="Good to know">Godt å vite</span></div>
         </article>
 
@@ -1395,7 +1406,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <h3 data-no="Bar" data-en="Bars"></h3>
       <div class="kort-rad">
         <article class="kort">
-          <h4>Caffè del Borgo</h4>
+          <h4><a href="https://www.tripadvisor.com/Attraction_Review-g187874-d24965930-Reviews-Caffe_Del_Borgo-Bari_Province_of_Bari_Puglia.html" target="_blank" rel="noopener">Caffè del Borgo</a></h4>
           <p class="meta">Piazza dell'Odegitria, rett ved katedralen</p>
           <p data-no="Koselig bar på plassen rett ved katedralen San Sabino. Perfekt for en aperitivo på kvelden. Holder åpent til godt over midnatt."
              data-en="A cosy bar on the square right by the cathedral of San Sabino. Perfect for an evening aperitivo. Open well past midnight."></p>
@@ -1438,7 +1449,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
       <h3 data-no="Aperitivo &amp; bar" data-en="Aperitivo &amp; bars"></h3>
       <div class="kort-rad">
         <article class="kort">
-          <h4>Borgo Antico Bistrot</h4>
+          <h4><a href="https://no.tripadvisor.com/Restaurant_Review-g642178-d10766832-Reviews-Borgo_Antico_Bistrot-Ostuni_Province_of_Brindisi_Puglia.html" target="_blank" rel="noopener">Borgo Antico Bistrot</a></h4>
           <p class="meta" data-no="Via Fina 8 · det klassiske solnedgangsstedet" data-en="Via Fina 8 · the classic sunset spot"></p>
           <p data-no="Det mest kjente stedet for aperitivo med utsikt i Ostuni. Terrasseplassene langs den svingete gaten har utsikt over de hvite husene og helt ut til Adriaterhavet. Veldig populært, og det kan fort bli fullt, så kom tidlig hvis du vil ha bord."
              data-en="The best-known aperitivo spot with a view in Ostuni. The terrace tables along the winding street look out over the white rooftops and all the way to the Adriatic. Very popular and it fills up fast, so come early if you want a table."></p>
@@ -1446,7 +1457,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
         </article>
 
         <article class="kort">
-          <h4>Bianc'Ostuni</h4>
+          <h4><a href="https://www.tripadvisor.com/Restaurant_Review-g642178-d19732639-Reviews-Bianc_Ostuni-Ostuni_Province_of_Brindisi_Puglia.html" target="_blank" rel="noopener">Bianc'Ostuni</a></h4>
           <p class="meta" data-no="Aperitivobar i gamlebyen" data-en="Aperitivo bar in the old town"></p>
           <p data-no="Vi tok en aperitivo her etter at vi hadde sett solnedgangen fra utkikkspunktet ved Borgo Antico Bistrot, som var fullt da vi kom. Utsikten er ikke like storslått som på Borgo, man ser ikke utover havet, men det er likevel veldig koselig stemning."
              data-en="We stopped here for an aperitivo after watching the sunset from the viewpoint by Borgo Antico Bistrot, which was full when we arrived. The view isn't as grand as at Borgo, you can't see out to the sea, but the atmosphere is really lovely."></p>
@@ -1538,7 +1549,7 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
   <!-- Lokal mat -->
   <div id="pug-mat" class="tabpanel" role="tabpanel">
     <div class="blokk">
-      <h3 data-no="Lokal mat å bestille i Puglia" data-en="Local food to order in Puglia"></h3>
+      <h3 data-no="Lokal mat og drikke i Puglia" data-en="Local food and drink in Puglia"></h3>
       <p class="blokk-note" data-no="Puglia har en av Italias mest særegne mattradisjoner. Mye av det beste er enkelt og basert på fantastiske råvarer."
          data-en="Puglia has one of Italy's most distinctive food traditions. Much of the best is simple, built on fantastic ingredients."></p>
       <div class="kort-rad">
@@ -1604,6 +1615,22 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
           <p class="meta">Valle d'Itria</p>
           <p data-no="Små kjøttruller fylt med ost og grillet over kull. Vi fikk aldri prøvd dem selv, men de dukker opp overalt i Valle d'Itria og lukter utrolig godt. Står høyt på lista neste gang."
              data-en="Small rolls of meat filled with cheese and grilled over charcoal. We never got around to trying them, but they're everywhere in the Valle d'Itria area and smell incredible. High on the list for next time."></p>
+          
+        </article>
+
+        <article class="kort">
+          <h4>Caffè leccese</h4>
+          <p class="meta" data-no="Iskaffe med mandelsmak, fra Lecce" data-en="Iced coffee with almond flavour, from Lecce"></p>
+          <p data-no="Veldig god, men veldig søt. Liker du mandelsmak, marsipan eller amaretto, kommer du mest sannsynlig til å like smaken. Jeg blandet ikke inn all sirupen selv, for da ble det for søtt for meg. Sirupen ligger ofte i bunnen, så rør litt forsiktig, så får du ikke med deg alt på en gang."
+             data-en="Very good, but very sweet. If you like almond, marzipan or amaretto, you'll most likely enjoy the flavour. I didn't mix in all the syrup myself, since it got too sweet for me. The syrup often sits at the bottom, so stir gently and you won't get all of it at once."></p>
+          
+        </article>
+
+        <article class="kort">
+          <h4>Sciroppo di latte di mandorla</h4>
+          <p class="meta" data-no="Mandelsirupen fra caffè leccese" data-en="The almond syrup from caffè leccese"></p>
+          <p data-no="Dette er sirupen som brukes i caffè leccese. Jeg kjøpte med meg en flaske hjem og har brukt den i iskaffen min. Veldig god smak, og en fin liten ting å ta med hjem."
+             data-en="This is the syrup used in caffè leccese. I brought a bottle home and have used it in my iced coffee. Really good flavour, and a nice little thing to bring home."></p>
           
         </article>
 
@@ -1677,8 +1704,9 @@ footer .sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--
 
 <footer>
   <p class="sign">Buon viaggio ♥</p>
-  <p data-no="Alt her er steder vi har vært selv. Sist oppdatert juli 2026."
-     data-en="Everything here is somewhere we've been ourselves. Last updated July 2026."></p>
+  <p class="disclaimer" data-no="Et lite forbehold: vi er ingen eksperter, og alt her er subjektive meninger om steder vi selv har vært og likt. Smak er forskjellig, så det treffer ikke nødvendigvis for alle. Gjør gjerne litt egen research i tillegg, så unngår du bomturer, og husk at vi ikke har vært alle steder helt nylig, så noe kan ha endret seg siden sist."
+     data-en="A small disclaimer: we're not experts, and everything here is our subjective take on places we've been and enjoyed ourselves. Taste is personal, so it won't necessarily be everyone's cup of tea. Do a little of your own research too so it's not a wasted trip, and remember we haven't been to every spot recently, so some things may have changed since our last visit."></p>
+  <p class="credit">© Linn Lanzi &nbsp;·&nbsp; <span data-no="Sist oppdatert juli 2026" data-en="Last updated July 2026"></span></p>
 </footer>
 
 <script>
