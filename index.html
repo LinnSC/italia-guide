@@ -48,7 +48,6 @@ a:hover{color:var(--gull-dyp)}
 /* ---------- HEADER ---------- */
 header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidden}
 .hero-svg{display:block;width:100%;height:auto;max-height:340px}
-.hero-inner{max-width:1300px;margin:0 auto}
 .hero-img{display:block;width:100%;height:auto}
 .hero-tekst{text-align:center;padding:28px 22px 32px}
 .hero-tekst h1{
@@ -138,6 +137,11 @@ header{position:relative;background:var(--gronn);color:var(--krem);overflow:hidd
     margin-left:-22px;margin-right:-22px;padding:10px 22px;
     scroll-padding-inline:22px}
   .nav-byer::-webkit-scrollbar{display:none}
+
+  /* flis-border og region-meny klistrer seg sammen øverst når man scroller */
+  .flis{position:sticky;top:0;z-index:31;opacity:1}
+  .nav-regioner{top:14px}
+  .nav-byer{top:calc(var(--nav-h,56px) + 14px)}
 }
 @media (min-width:761px){
   .pills{display:flex !important}
@@ -315,8 +319,8 @@ footer .credit{margin-top:16px;font-size:.72rem;letter-spacing:.08em;color:rgba(
        data-en="Places we love, food we miss and the tips we wish someone had given us"></p>
   </div>
   </div>
-  <div class="flis" aria-hidden="true"></div>
 </header>
+<div class="flis" aria-hidden="true"></div>
 
 <nav class="nav-regioner" aria-label="Regioner">
   <div class="wrap" style="position:relative">
